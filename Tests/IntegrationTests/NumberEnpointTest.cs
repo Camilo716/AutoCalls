@@ -1,12 +1,9 @@
-using AutoCallsApi.Data.EntityFramework;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Test.Helpers;
-using Tests.IntegrationTests.Helpers;
 
 namespace Tests.IntegrationTests;
 
 // "Number" enpoints tests
-public partial class EnpointsTests : IClassFixture<WebApplicationFactory<Program>>
+public partial class EnpointsTests
 {
     [Fact]
     public async Task Post_NumberReturnSuccesAndRecordsInDbIncrease()
