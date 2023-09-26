@@ -34,7 +34,7 @@ namespace AutoCallsApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("numbers");
+                    b.ToTable("Numbers");
                 });
 #pragma warning restore 612, 618
         }

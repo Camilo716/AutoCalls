@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AutoCallsApi.Models;
+namespace AutoCallsApi.DTOs;
 
-public class Number : IId
+public class NumberCreationDTO
 {
-    public int Id { get; set; }
     [Required]
     public int NumberValue{ get; set; }
 }
