@@ -21,4 +21,11 @@ public class NumberController : ControllerBase
         List<Number> numbers = await _numberService.GetNumbersAsync(); 
         return Ok(numbers);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<Number>> PostAsync([FromBody] Number number)
+    {
+        Number numberPosted = await _numberService.PostNumberAsync(number);
+        return Ok(number);
+    }
 }

@@ -1,6 +1,7 @@
 
 using AutoCallsApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace AutoCallsApi.Data.EntityFramework;
 
@@ -18,5 +19,12 @@ public class EfRepository<TEntity>: IRepository<TEntity> where TEntity: class, I
     public async Task<List<TEntity>> GetAllAsync()
     {
         return await _entities.ToListAsync();
+    }
+
+    public async Task<Number> SaveAsync(Number number)
+    {
+        EntityEntry<Number> numberCreated = await _dbContext.AddAsync(number);
+        _dbContext.SaveChanges();
+        return numberCreated.Entity;
     }
 }
