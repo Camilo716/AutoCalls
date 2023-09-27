@@ -4,7 +4,7 @@ AutoCalls is a project that provides functionality for saving phone numbers and 
 ## Features
 - Phone Number Management: Easily store and manage phone numbers in a database.
 
-- Audio Storage: Store audio files in the system for playback during phone calls.
+- Audio Storage: Store audio byte stream in a database for playback during phone calls.
 
 - Mass Calling: Initiate mass phone calls to a list of numbers and deliver a predefined audio message.
 
