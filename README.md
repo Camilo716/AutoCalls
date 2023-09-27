@@ -12,3 +12,5 @@ AutoCalls is a project that provides functionality for saving phone numbers and 
 - ASP.NET: The project is built using ASP.NET.
 
 - FreeSWITCH: FreeSWITCH is used for handling the actual phone calls.
+
+For a better understanding of the project see https://www.youtube.com/watch?v=bnjbOyq8L8U 😹
