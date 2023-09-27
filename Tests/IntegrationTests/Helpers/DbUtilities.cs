@@ -8,8 +8,15 @@ public static class DbUtilities
 {
     public static async Task<int> GetNumberRecordsCount(EfApplicationDbContext db)
     {
-        var actors = db.Numbers;
-        int counter = await actors.CountAsync();
+        DbSet<Number> numbers = db.Numbers;
+        int counter = await numbers.CountAsync();
+        return counter;
+    }
+
+    public static async Task<int> GetAudioRecordsCount(EfApplicationDbContext db)
+    {
+        DbSet<Audio> audios = db.Audios;
+        int counter = await audios.CountAsync();
         return counter;
     }
 

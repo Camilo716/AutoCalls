@@ -21,9 +21,9 @@ public class EfRepository<TEntity>: IRepository<TEntity> where TEntity: class, I
         return await _entities.ToListAsync();
     }
 
-    public async Task<Number> SaveAsync(Number number)
+    public async Task<TEntity> SaveAsync(TEntity number)
     {
-        EntityEntry<Number> numberCreated = await _dbContext.AddAsync(number);
+        EntityEntry<TEntity> numberCreated = await _dbContext.AddAsync(number);
         _dbContext.SaveChanges();
         return numberCreated.Entity;
     }

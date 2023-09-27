@@ -5,5 +5,5 @@ namespace AutoCallsApi.Data;
 public interface IRepository<TEntity> where TEntity : class, IId
 {
     Task<List<TEntity>> GetAllAsync();
-    Task<Number> SaveAsync(Number number);
+    Task<TEntity> SaveAsync(TEntity entity);
 }

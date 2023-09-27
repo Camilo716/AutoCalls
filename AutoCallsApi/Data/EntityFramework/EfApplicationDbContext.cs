@@ -6,6 +6,7 @@ namespace AutoCallsApi.Data.EntityFramework;
 public class EfApplicationDbContext : DbContext
 {
     public DbSet<Number> Numbers { get; set; }
+    public DbSet<Audio> Audios { get; set; }
 
     public EfApplicationDbContext(DbContextOptions options) : base(options)
     {

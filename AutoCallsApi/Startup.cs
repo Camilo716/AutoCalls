@@ -23,6 +23,8 @@ public class Startup
         );
         services.AddScoped<IRepository<Number>, EfRepository<Number>>();
         services.AddScoped<NumberService>();
+        services.AddScoped<IRepository<Audio>, EfRepository<Audio>>();
+        services.AddScoped<AudioService>();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
