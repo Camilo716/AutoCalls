@@ -13,8 +13,12 @@ public class AudioService
         _repository = repository;
     }
 
-    internal async Task<Audio> PostAudioAsync(Audio audio)
+    internal async Task<Audio> PostAudioAsync(IFormFile audioFile)
     {
-        return await _repository.SaveAsync(audio);
+        using var memoryStream = new MemoryStream();
+        await audioFile.CopyToAsync(memoryStream);
+        byte[] audioData = memoryStream.ToArray(); 
+
+        return await _repository.SaveAsync(new Audio {AudioData = audioData});
     }
 }

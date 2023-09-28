@@ -18,9 +18,7 @@ public class AudioController : ControllerBase
 
     [HttpPost]
     public async Task<ActionResult<Audio>> PostAsync([FromForm] IFormFile audioFile)
-    {
-        using var memoryStream = new MemoryStream();
-        
+    {        
         var validExtensions = new string[] { ".mp3" };
         if (!FileExtensionValidator.IsValid(audioFile, validExtensions))
         {
@@ -28,9 +26,7 @@ public class AudioController : ControllerBase
                 $"{audioFile.FileName} hasn't valid extension ({validExtensions.ToString()})");
         }
 
-        await audioFile.CopyToAsync(memoryStream);
-        byte[] audioData = memoryStream.ToArray(); 
-        Audio audioPosted = await _audioService.PostAudioAsync(new Audio {AudioData = audioData});
+        Audio audioPosted = await _audioService.PostAudioAsync(audioFile);
         return Ok(audioPosted);
     }
 }
