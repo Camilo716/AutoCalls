@@ -1,5 +1,6 @@
 using AutoCallsApi.Models;
 using AutoCallsApi.Services;
+using AutoCallsApi.Validators.FileValidators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutoCallsApi.Controllers;
@@ -19,9 +20,16 @@ public class AudioController : ControllerBase
     public async Task<ActionResult<Audio>> PostAsync([FromForm] IFormFile audioFile)
     {
         using var memoryStream = new MemoryStream();
+        
+        var validExtensions = new string[] { ".mp3" };
+        if (!FileExtensionValidator.IsValid(audioFile, validExtensions))
+        {
+            return BadRequest(
+                $"{audioFile.FileName} hasn't valid extension ({validExtensions.ToString()})");
+        }
+
         await audioFile.CopyToAsync(memoryStream);
         byte[] audioData = memoryStream.ToArray(); 
-
         Audio audioPosted = await _audioService.PostAudioAsync(new Audio {AudioData = audioData});
         return Ok(audioPosted);
     }

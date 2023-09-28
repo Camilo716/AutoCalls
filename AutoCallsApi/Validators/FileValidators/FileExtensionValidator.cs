@@ -2,12 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AutoCallsApi.Validators.FileValidators;
 
-public class FileExtensionValidator
+public static class FileExtensionValidator
 {
-    private readonly string[] ValidExtensions;
-
-    public FileExtensionValidator(string[] validExtensions)
+    public static bool IsValid(IFormFile file, string[] validExtensions)
     {
-        ValidExtensions = validExtensions;
-    } 
+        string fileExtension = Path.GetExtension(file.FileName).ToLower();
+        bool IsvalidExtension = validExtensions.Contains(fileExtension);
+        return IsvalidExtension;
+    }
 }
