@@ -4,7 +4,7 @@ namespace Tests.IntegrationTests.Helpers;
 
 internal static class AudioUtilities
 {
-    internal static HttpContent GetAudioHttpContent(string AudioRoute)
+    internal static HttpContent GetAudioHttpContent(string AudioRoute, string fileName)
     {
         byte[] audioBytes = File.ReadAllBytes(AudioRoute);
         var audioContent = new ByteArrayContent(audioBytes);
@@ -12,7 +12,7 @@ internal static class AudioUtilities
 
         var content = new MultipartFormDataContent
         {
-            { audioContent, "audioFile", "audio.mp3" }
+            { audioContent, "audioFile", fileName }
         };
 
         return content;
