@@ -2,11 +2,11 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using AutoMapper.Configuration.Conventions;
 using Test.Helpers;
-using Tests.IntegrationTests.Helpers;
+using IntegrationTests.Helpers;
 
-namespace Tests.IntegrationTests;
+namespace IntegrationTests;
 
-// "Number" enpoints tests
+// "Audio" enpoints tests
 public partial class EnpointsTests
 {
     [Theory]

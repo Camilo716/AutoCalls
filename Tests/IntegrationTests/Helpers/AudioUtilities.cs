@@ -1,6 +1,6 @@
 using System.Net.Http.Headers;
 
-namespace Tests.IntegrationTests.Helpers;
+namespace IntegrationTests.Helpers;
 
 internal static class AudioUtilities
 {

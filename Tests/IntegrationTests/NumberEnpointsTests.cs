@@ -1,6 +1,6 @@
 using Test.Helpers;
 
-namespace Tests.IntegrationTests;
+namespace IntegrationTests;
 
 // "Number" enpoints tests
 public partial class EnpointsTests

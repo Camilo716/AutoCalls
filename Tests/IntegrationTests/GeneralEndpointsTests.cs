@@ -1,8 +1,8 @@
 using AutoCallsApi.Data.EntityFramework;
 using Test.Helpers;
-using Tests.IntegrationTests.Helpers;
+using IntegrationTests.Helpers;
 
-namespace Tests.IntegrationTests;
+namespace IntegrationTests;
 
 public partial class EnpointsTests 
     : IClassFixture<CustomWebApplicationFactory<Program>>
