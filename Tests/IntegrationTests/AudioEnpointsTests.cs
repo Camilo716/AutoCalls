@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using AutoMapper.Configuration.Conventions;
 using Test.Helpers;
 using IntegrationTests.Helpers;
+using AutoCallsApi.Models;
 
 namespace IntegrationTests;
 
@@ -15,12 +16,12 @@ public partial class EnpointsTests
     {
         var client = _factory.CreateClient();
         HttpContent audio = AudioUtilities.GetAudioHttpContent(fileRoute, fileName);
-        int countBefore = await DbUtilities.GetAudioRecordsCount(_context);
+        int countBefore = await DbUtilities.GetRecordsCount<Audio>(_context, "Audios");
 
         HttpResponseMessage response = await client.PostAsync("/api/audio", audio);
 
         response.EnsureSuccessStatusCode();
-        int countAfter = await DbUtilities.GetAudioRecordsCount(_context);
+        int countAfter = await DbUtilities.GetRecordsCount<Audio>(_context, "Audios");
         Assert.Equal(countBefore+1, countAfter);
     }
 

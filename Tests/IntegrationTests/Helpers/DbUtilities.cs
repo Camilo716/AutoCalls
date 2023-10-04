@@ -1,3 +1,4 @@
+using System.Reflection;
 using AutoCallsApi.Data.EntityFramework;
 using AutoCallsApi.Models;
 using Microsoft.EntityFrameworkCore;
@@ -6,17 +7,11 @@ namespace Test.Helpers;
 
 public static class DbUtilities
 {
-    public static async Task<int> GetNumberRecordsCount(EfApplicationDbContext db)
+    public static async Task<int> GetRecordsCount<TEntity>(EfApplicationDbContext db, string attributeName) where TEntity: class
     {
-        DbSet<Number> numbers = db.Numbers;
-        int counter = await numbers.CountAsync();
-        return counter;
-    }
-
-    public static async Task<int> GetAudioRecordsCount(EfApplicationDbContext db)
-    {
-        DbSet<Audio> audios = db.Audios;
-        int counter = await audios.CountAsync();
+        PropertyInfo propertyInfo = typeof(EfApplicationDbContext).GetProperty(attributeName)!;
+        DbSet<TEntity> records = (DbSet<TEntity>) propertyInfo.GetValue(db)!;
+        int counter = await records.CountAsync();
         return counter;
     }
 

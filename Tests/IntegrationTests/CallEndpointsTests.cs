@@ -15,12 +15,12 @@ public partial class EnpointsTests
     {
         var client = _factory.CreateClient();
         HttpContent call = CallUtilities.GetCallHttpContent(numberId: 1, audioId: 2);
-        // int countBefore = await DbUtilities.GetNumberRecordsCount(_context);
+        int countBefore = await DbUtilities.GetRecordsCount<Call>(_context, "Calls");
 
         HttpResponseMessage response = await client.PostAsync("/api/call", call);
 
         response.EnsureSuccessStatusCode();
-        // int countAfter = await DbUtilities.GetNumberRecordsCount(_context);
-        // Assert.Equal(countBefore+1, countAfter);
+        int countAfter = await DbUtilities.GetRecordsCount<Call>(_context, "Calls");
+        Assert.Equal(countBefore+1, countAfter);
     }
 }
