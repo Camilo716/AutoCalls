@@ -18,6 +18,5 @@ internal static class CallUtilities
         HttpContent httpContent = new StringContent(
             jsonContent, Encoding.UTF8, "application/json");
         return httpContent;
-        return null;
     }
 }

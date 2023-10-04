@@ -25,6 +25,8 @@ public class Startup
         services.AddScoped<NumberService>();
         services.AddScoped<IRepository<Audio>, EfRepository<Audio>>();
         services.AddScoped<AudioService>();
+        services.AddScoped<IRepository<Call>, EfRepository<Call>>();
+        services.AddScoped<CallService>();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

@@ -15,7 +15,7 @@ public partial class EnpointsTests
     public async Task Post_CallReturnSuccesAndRecordsInDbIncrease()
     {
         var client = _factory.CreateClient();
-        HttpContent call = CallUtilities.GetCallHttpContent(numberId: 1, audioId: 2);
+        HttpContent call = CallUtilities.GetCallHttpContent(numberId: 1, audioId: 1);
         int countBefore = await DbUtilities.GetRecordsCount<Call>(_context, "Calls");
 
         HttpResponseMessage response = await client.PostAsync("/api/call", call);

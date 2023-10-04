@@ -25,7 +25,9 @@ public static class DbUtilities
     private static void InitializeDbForTests(EfApplicationDbContext db)
     {
         var seedNumbers = GetSeedingNumbers();
+        var seedAudios = GetSeedingAudios();
         db.Numbers.AddRange(seedNumbers);
+        db.Audios.AddRange(seedAudios);
         db.SaveChanges();
     }
 
@@ -36,6 +38,14 @@ public static class DbUtilities
             new Number(){ NumberValue= 324543256},
             new Number(){ NumberValue= 315432166},
             new Number(){ NumberValue= 356782560},
+        };
+    }
+
+    private static List<Audio> GetSeedingAudios()
+    {
+        return new List<Audio>()
+        {
+            new Audio(){ AudioData = File.ReadAllBytes("../../../Helpers/Audios/testing-audio.mp3") }
         };
     }
 }
