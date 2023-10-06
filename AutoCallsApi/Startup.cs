@@ -2,6 +2,7 @@ using AutoCallsApi.Data;
 using AutoCallsApi.Data.EntityFramework;
 using AutoCallsApi.Models;
 using AutoCallsApi.Services;
+using EventSocketLibrary.ClientESL;
 using Microsoft.EntityFrameworkCore;
 
 public class Startup
@@ -27,6 +28,14 @@ public class Startup
         services.AddScoped<AudioService>();
         services.AddScoped<IRepository<Call>, EfRepository<Call>>();
         services.AddScoped<CallService>();
+
+        services.AddSingleton(
+            new ClientESL
+            (
+                _config["FreeSwitchHost"]!,
+                Convert.ToInt32(_config["FreeSwitchPort"])
+            )
+        );
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
