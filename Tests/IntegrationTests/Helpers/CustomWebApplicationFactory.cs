@@ -1,4 +1,6 @@
 using AutoCallsApi.Data.EntityFramework;
+using EventSocketLibrary.ClientESL;
+using IntegrationTests.Helpers.ESL;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +17,7 @@ public class CustomWebApplicationFactory<TProgram>
 
         builder.ConfigureServices(services =>
         {
-            var dbContextDescriptor = services.SingleOrDefault(
+            ServiceDescriptor? dbContextDescriptor = services.SingleOrDefault(
                 d => d.ServiceType ==
                     typeof(DbContextOptions<EfApplicationDbContext>));
             services.Remove(dbContextDescriptor!); 
@@ -24,6 +26,13 @@ public class CustomWebApplicationFactory<TProgram>
             {
                 options.UseInMemoryDatabase(new Guid().ToString());
             });
+
+            ServiceDescriptor? IClientESLContextDescriptor = services.SingleOrDefault(
+                s => s.ServiceType == typeof(IClientESL)
+            );
+            services.Remove(IClientESLContextDescriptor!);
+
+            services.AddSingleton<IClientESL>(new DumbClientESL());
         });
     }
 }

@@ -7,9 +7,9 @@ namespace AutoCallsApi.Services;
 public class CallService
 {
     private readonly IRepository<Call> _repository;
-    private readonly ClientESL _clientESL;
+    private readonly IClientESL _clientESL;
     
-    public CallService(IRepository<Call> repository, ClientESL clientESL)
+    public CallService(IRepository<Call> repository, IClientESL clientESL)
     {
         _repository = repository;
         _clientESL = clientESL;

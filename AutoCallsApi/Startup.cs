@@ -28,10 +28,9 @@ public class Startup
         services.AddScoped<AudioService>();
         services.AddScoped<IRepository<Call>, EfRepository<Call>>();
         services.AddScoped<CallService>();
-
-        services.AddSingleton(
-            new ClientESL
-            (
+        
+        services.AddSingleton<IClientESL>(
+            new ClientESL(
                 _config["FreeSwitchHost"]!,
                 Convert.ToInt32(_config["FreeSwitchPort"])
             )
