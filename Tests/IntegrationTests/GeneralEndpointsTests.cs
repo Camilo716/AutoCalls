@@ -19,7 +19,7 @@ public partial class EnpointsTests
 
     [Theory]
     [InlineData("/api/number")]
-    public async Task Get_EnpointsReturnSuccessAndCorrectContentType(string url)
+    public async Task ClientGetAll_ReturnSuccessTest(string url)
     {
         var client = _factory.CreateClient();
 

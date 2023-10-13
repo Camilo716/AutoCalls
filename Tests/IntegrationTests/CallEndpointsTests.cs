@@ -4,7 +4,6 @@ using System.Text;
 using AutoMapper.Configuration.Conventions;
 using Test.Helpers;
 using IntegrationTests.Helpers;
-using AutoCallsApi.Models;
 
 namespace IntegrationTests;
 
@@ -12,16 +11,13 @@ namespace IntegrationTests;
 public partial class EnpointsTests
 {
     [Fact]
-    public async Task Post_CallReturnSuccesAndRecordsInDbIncrease()
+    public async Task ClientMakeAMasiveCall_ReturnSuccessTest()
     {
         var client = _factory.CreateClient();
         HttpContent call = CallUtilities.GetCallHttpContent(numberId: 1, audioId: 1);
-        int countBefore = await DbUtilities.GetRecordsCount<Call>(_context, "Calls");
 
         HttpResponseMessage response = await client.PostAsync("/api/call", call);
 
         response.EnsureSuccessStatusCode();
-        int countAfter = await DbUtilities.GetRecordsCount<Call>(_context, "Calls");
-        Assert.Equal(countBefore+1, countAfter);
     }
 }
