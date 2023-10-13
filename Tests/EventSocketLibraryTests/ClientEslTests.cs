@@ -6,9 +6,9 @@ public class ClientEslTests: IDisposable
 {
     private const string HOST = "172.16.238.10";
     private const int PORT = 8020;
-    private ClientESL _client;
+    private IClientESL _client;
 
-    public ClientEslTests()
+    public ClientEslTests() 
     {
         _client = new ClientESL(HOST, PORT);
         _client.Connect();

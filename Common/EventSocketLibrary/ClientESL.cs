@@ -1,11 +1,10 @@
 ﻿using System.Net.Sockets;
 using System.Text;
-using EventSocketLibrary.Util;
 using EventSocketLibrary.Util.Util;
 
 namespace EventSocketLibrary.ClientESL;
 
-public class ClientESL
+public class ClientESL : IClientESL
 {
     private Socket _socket;
     private string HOST;
