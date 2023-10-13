@@ -6,5 +6,5 @@ public class Number : IId
 {
     public int Id { get; set; }
     [Required]
-    public int NumberValue{ get; set; }
+    public string NumberValue{ get; set; }
 }

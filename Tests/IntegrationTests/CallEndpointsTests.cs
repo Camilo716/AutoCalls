@@ -14,7 +14,11 @@ public partial class EnpointsTests
     public async Task ClientMakeAMasiveCall_ReturnSuccessTest()
     {
         var client = _factory.CreateClient();
-        HttpContent call = CallUtilities.GetCallHttpContent(numberId: 1, audioId: 1);
+        HttpContent call = CallUtilities.GetCallHttpContent
+        (
+            numbersIds: new int[]{1, 2, 3},
+            audioId: 1
+        );
 
         HttpResponseMessage response = await client.PostAsync("/api/call", call);
 
