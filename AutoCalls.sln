@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{06FE20
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSocketLibrary", "Common\EventSocketLibrary\EventSocketLibrary.csproj", "{6961C12B-B9B1-49A8-8173-DDAA9CE803AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSocketLibraryTests", "Tests\EventSocketLibraryTests\EventSocketLibraryTests.csproj", "{87B17432-8FDB-493A-B2FF-93D09E773F5E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,14 +34,9 @@ Global
 		{6961C12B-B9B1-49A8-8173-DDAA9CE803AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6961C12B-B9B1-49A8-8173-DDAA9CE803AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6961C12B-B9B1-49A8-8173-DDAA9CE803AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{87B17432-8FDB-493A-B2FF-93D09E773F5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87B17432-8FDB-493A-B2FF-93D09E773F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87B17432-8FDB-493A-B2FF-93D09E773F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87B17432-8FDB-493A-B2FF-93D09E773F5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{14719225-19D0-4995-9C8C-8D348A02004A} = {526E385E-6FC2-4A97-8FEF-B54F30E5D06C}
 		{6961C12B-B9B1-49A8-8173-DDAA9CE803AE} = {06FE202D-4C95-437D-8793-9166F4AFB611}
-		{87B17432-8FDB-493A-B2FF-93D09E773F5E} = {526E385E-6FC2-4A97-8FEF-B54F30E5D06C}
 	EndGlobalSection
 EndGlobal
