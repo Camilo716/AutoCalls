@@ -6,7 +6,7 @@ public class Call : IId
 {
     public int Id { get; set ; }
     [Required]
-    public IEnumerable<string> NumbersIds { get; set; }
+    public ICollection<Number> Numbers { get; set; }
     [Required]
     public int AudioId { get; set; }
 }

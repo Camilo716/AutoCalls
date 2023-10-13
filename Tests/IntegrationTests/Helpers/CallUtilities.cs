@@ -9,7 +9,7 @@ namespace IntegrationTests.Helpers;
 
 internal static class CallUtilities
 {
-    internal static HttpContent GetCallHttpContent(IEnumerable<int> numbersIds, int audioId)
+    internal static HttpContent GetCallHttpContent(ICollection<int> numbersIds, int audioId)
     {
         if (numbersIds.IsNullOrEmpty())
             throw new ArgumentException($"{nameof(numbersIds)} cannot be empty");
