@@ -1,4 +1,6 @@
-namespace EventSocketLibrary.ClientESL;
+using EventSocketLibrary.ClientESL;
+
+namespace IntegrationTests.Helpers.ESL;
 
 public class DumbClientESL : IClientESL
 {
@@ -17,8 +19,8 @@ public class DumbClientESL : IClientESL
         return password == "ClueCon" ? successResponse : errorResponse;  
     }
 
-    public string ApiCommand(string args)
+    public string Call(string number, string? args)
     {
-        throw new NotImplementedException();
+        return "+OK dd0b249c-2e56-43e0-abad-a716220a824e";
     }
 }

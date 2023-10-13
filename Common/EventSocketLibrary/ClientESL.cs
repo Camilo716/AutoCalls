@@ -39,13 +39,14 @@ public class ClientESL : IClientESL
         return responseValue;
     }
 
-    public string ApiCommand(string args)
+    public string Call(string number, string args = "")
     {
-        SendData($"api {args}");
+        string apiCommand = $"api originate {number} {args}";
+        SendData(apiCommand);
 
         string headerResponse = RecolectHeaderResponse();
         string bodyResponse = RecolectBodyResponse(headerResponse);
-        
+
         return bodyResponse;
     }
 
@@ -90,5 +91,4 @@ public class ClientESL : IClientESL
 
         return data;
     }
-
 }

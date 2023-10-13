@@ -5,5 +5,5 @@ public interface IClientESL
     void Connect();
     void CloseConnection();
     string Authenticate(string password);
-    string ApiCommand(string args);
+    string Call(string number, string args = "");
 }
