@@ -10,20 +10,20 @@ namespace AutoCallsApi.Controllers;
 [Route("/api/[Controller]")]
 public class CallController: ControllerBase
 {
-    private readonly CallService _callService;
+    private readonly MasiveCallService _callService;
     private readonly IMapper _mapper;
 
-    public CallController(CallService callService, IMapper mapper)
+    public CallController(MasiveCallService callService, IMapper mapper)
     {
         _callService = callService;
         _mapper = mapper;
     }
 
     [HttpPost]
-    public async Task<ActionResult<Call>> PostAsync([FromBody] CallCreationDTO callCreationDTO)
+    public async Task<ActionResult<MasiveCall>> PostAsync([FromBody] MasiveCallCreationDTO MasiveCallCreationDTO)
     {
-        Call call = _mapper.Map<Call>(callCreationDTO);
-        Call callPosted = await _callService.PostCallAsync(call);
+        MasiveCall call = _mapper.Map<MasiveCall>(MasiveCallCreationDTO);
+        MasiveCall callPosted = await _callService.PostMasiveCallAsync(call);
         return Ok(callPosted);
     }
 }

@@ -4,10 +4,11 @@ using System.Text;
 using AutoMapper.Configuration.Conventions;
 using Test.Helpers;
 using IntegrationTests.Helpers;
+using AutoCallsApi.Models;
 
 namespace IntegrationTests;
 
-// "Call" enpoints tests
+// "MasiveCall" enpoints tests
 public partial class EnpointsTests
 {
     [Fact]
@@ -21,7 +22,7 @@ public partial class EnpointsTests
         );
 
         HttpResponseMessage response = await client.PostAsync("/api/call", call);
-
+ 
         response.EnsureSuccessStatusCode();
     }
 }

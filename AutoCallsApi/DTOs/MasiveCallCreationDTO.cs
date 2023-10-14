@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AutoCallsApi.DTOs;
 
-public class CallCreationDTO
+public class MasiveCallCreationDTO
 {
     [Required]
     public ICollection<int> NumbersIds { get; set; }

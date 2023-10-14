@@ -39,7 +39,7 @@ public class ClientESL : IClientESL
         return responseValue;
     }
 
-    public string Call(string number, string args = "")
+    public string MasiveCall(string number, string args = "")
     {
         string apiCommand = $"api originate {number} {args}";
         SendData(apiCommand);

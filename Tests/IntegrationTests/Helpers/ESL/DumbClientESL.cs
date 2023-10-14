@@ -19,7 +19,7 @@ public class DumbClientESL : IClientESL
         return password == "ClueCon" ? successResponse : errorResponse;  
     }
 
-    public string Call(string number, string? args)
+    public string MasiveCall(string number, string? args)
     {
         return "+OK dd0b249c-2e56-43e0-abad-a716220a824e";
     }

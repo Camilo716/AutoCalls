@@ -4,18 +4,18 @@ using EventSocketLibrary.ClientESL;
 
 namespace AutoCallsApi.Services;
 
-public class CallService
+public class MasiveCallService
 {
-    private readonly IRepository<Call> _repository;
+    private readonly IRepository<MasiveCall> _repository;
     private readonly IClientESL _clientESL;
     
-    public CallService(IRepository<Call> repository, IClientESL clientESL)
+    public MasiveCallService(IRepository<MasiveCall> repository, IClientESL clientESL)
     {
         _repository = repository;
         _clientESL = clientESL;
     }  
 
-    public async Task<Call> PostCallAsync(Call call)
+    public async Task<MasiveCall> PostMasiveCallAsync(MasiveCall call)
     {
         return await _repository.SaveAsync(call);
     }

@@ -26,8 +26,8 @@ public class Startup
         services.AddScoped<NumberService>();
         services.AddScoped<IRepository<Audio>, EfRepository<Audio>>();
         services.AddScoped<AudioService>();
-        services.AddScoped<IRepository<Call>, EfRepository<Call>>();
-        services.AddScoped<CallService>();
+        services.AddScoped<IRepository<MasiveCall>, EfRepository<MasiveCall>>();
+        services.AddScoped<MasiveCallService>();
         
         services.AddSingleton<IClientESL>(
             new ClientESL(

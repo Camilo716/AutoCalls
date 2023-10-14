@@ -1,9 +1,8 @@
 using System.Text;
 using AutoCallsApi.DTOs;
 using Newtonsoft.Json;
-using System.Linq;
 using Microsoft.IdentityModel.Tokens;
-using Xunit.Sdk;
+using AutoCallsApi.Models;
 
 namespace IntegrationTests.Helpers;
 
@@ -14,7 +13,7 @@ internal static class CallUtilities
         if (numbersIds.IsNullOrEmpty())
             throw new ArgumentException($"{nameof(numbersIds)} cannot be empty");
 
-        CallCreationDTO call = new CallCreationDTO 
+        MasiveCallCreationDTO call = new MasiveCallCreationDTO 
         {
             NumbersIds = numbersIds,
             AudioId = audioId 
@@ -26,5 +25,12 @@ internal static class CallUtilities
             jsonContent, Encoding.UTF8, "application/json");
 
         return httpContent;
+    }
+
+    internal static async Task<MasiveCall> GetCallModelFromHttpResponse(HttpResponseMessage response)
+    {
+        string numberJson = await response.Content.ReadAsStringAsync();
+        MasiveCall numberModel = JsonConvert.DeserializeObject<MasiveCall>(numberJson)!;
+        return numberModel;
     }
 }
