@@ -8,12 +8,12 @@ namespace AutoCallsApi.Controllers;
 
 [ApiController]
 [Route("/api/[Controller]")]
-public class CallController: ControllerBase
+public class MasiveCallController: ControllerBase
 {
     private readonly MasiveCallService _callService;
     private readonly IMapper _mapper;
 
-    public CallController(MasiveCallService callService, IMapper mapper)
+    public MasiveCallController(MasiveCallService callService, IMapper mapper)
     {
         _callService = callService;
         _mapper = mapper;

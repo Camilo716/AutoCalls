@@ -21,7 +21,7 @@ public partial class EnpointsTests
             audioId: 1
         );
 
-        HttpResponseMessage response = await client.PostAsync("/api/call", call);
+        HttpResponseMessage response = await client.PostAsync("/api/MasiveCall", call);
  
         response.EnsureSuccessStatusCode();
     }
