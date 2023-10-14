@@ -27,7 +27,7 @@ internal static class CallUtilities
         return httpContent;
     }
 
-    internal static async Task<MasiveCall> GetCallModelFromHttpResponse(HttpResponseMessage response)
+    internal static async Task<MasiveCall> GetNumberModelFromHttpResponse(HttpResponseMessage response)
     {
         string numberJson = await response.Content.ReadAsStringAsync();
         MasiveCall numberModel = JsonConvert.DeserializeObject<MasiveCall>(numberJson)!;
