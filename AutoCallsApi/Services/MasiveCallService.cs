@@ -1,4 +1,5 @@
 using AutoCallsApi.Data;
+using AutoCallsApi.DTOs;
 using AutoCallsApi.Models;
 using EventSocketLibrary.ClientESL;
 
@@ -15,8 +16,17 @@ public class MasiveCallService
         _clientESL = clientESL;
     }  
 
-    public async Task<MasiveCall> PostMasiveCallAsync(MasiveCall call)
+    public async Task<MasiveCall> PostMasiveCallAsync(MasiveCall masiveCall)
     {
-        return await _repository.SaveAsync(call);
+        _clientESL.Connect();
+        _clientESL.Authenticate("ClueCon");
+
+
+        foreach (Call call in masiveCall.Calls)
+        {
+            Number number = call.Number;
+        }      
+    
+        return await _repository.SaveAsync(masiveCall);
     }
 }

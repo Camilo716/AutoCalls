@@ -5,6 +5,8 @@ using AutoMapper.Configuration.Conventions;
 using Test.Helpers;
 using IntegrationTests.Helpers;
 using AutoCallsApi.Models;
+using System.Collections;
+using Azure;
 
 namespace IntegrationTests;
 
@@ -15,9 +17,10 @@ public partial class EnpointsTests
     public async Task ClientMakeAMasiveCall_ReturnSuccessTest()
     {
         var client = _factory.CreateClient();
+        ICollection<Number> _numbersToCall = await GetNumbersToCallAsync(client);
         HttpContent call = MasiveCallUtilities.GetCallHttpContent
         (
-            numbersIds: new int[]{1, 2, 3},
+            numbersToCall: _numbersToCall,
             audioId: 1
         );
 
@@ -26,5 +29,12 @@ public partial class EnpointsTests
         response.EnsureSuccessStatusCode();
         MasiveCall masiveCall = await MasiveCallUtilities.GetMassiveCallsModelFromHttpResponseAsync(response);
         Assert.Equal(3, masiveCall.Calls.Count);
+    }
+
+    private async Task<ICollection<Number>> GetNumbersToCallAsync(HttpClient client)
+    {
+        HttpResponseMessage response = await client.GetAsync("/api/Number");
+        ICollection<Number> numbers = await NumberUtilities.GetNumbersCollectionFromHttpResponse(response);
+        return numbers;
     }
 }

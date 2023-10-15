@@ -5,5 +5,5 @@ public interface IClientESL
     void Connect();
     void CloseConnection();
     string Authenticate(string password);
-    string MasiveCall(string number, string args = "");
+    string Call(string number, string args = "");
 }

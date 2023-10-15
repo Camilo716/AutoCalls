@@ -15,10 +15,10 @@ internal static class NumberUtilities
         return httpContent;
     }
 
-    internal static async Task<Number> GetNumberModelFromHttpResponse(HttpResponseMessage response)
+    internal static async Task<ICollection<Number>> GetNumbersCollectionFromHttpResponse(HttpResponseMessage response)
     {
         string numberJson = await response.Content.ReadAsStringAsync();
-        Number numberModel = JsonConvert.DeserializeObject<Number>(numberJson)!;
-        return numberModel;
+        ICollection<Number> numbersModel = JsonConvert.DeserializeObject<ICollection<Number>>(numberJson)!;
+        return numbersModel;
     }
 }
