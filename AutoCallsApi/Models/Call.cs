@@ -3,14 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoCallsApi.Models;
 
-public class MasiveCall : IId
+public class Call : IId
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set ; }
+    public int Id { get; set; }
 
     [Required]
-    public ICollection<Call> Calls { get; set; }
+    public int NumberId { get; set; }
+    public Number Number { get; set; }
 
     [Required]
     public int AudioId { get; set; }
