@@ -15,7 +15,7 @@ public partial class EnpointsTests
     public async Task ClientMakeAMasiveCall_ReturnSuccessTest()
     {
         var client = _factory.CreateClient();
-        HttpContent call = CallUtilities.GetCallHttpContent
+        HttpContent call = MasiveCallUtilities.GetCallHttpContent
         (
             numbersIds: new int[]{1, 2, 3},
             audioId: 1
@@ -24,5 +24,7 @@ public partial class EnpointsTests
         HttpResponseMessage response = await client.PostAsync("/api/MasiveCall", call);
  
         response.EnsureSuccessStatusCode();
+        MasiveCall masiveCall = await MasiveCallUtilities.GetMassiveCallsModelFromHttpResponseAsync(response);
+        Assert.Equal(3, masiveCall.Calls.Count);
     }
 }

@@ -6,7 +6,7 @@ using AutoCallsApi.Models;
 
 namespace IntegrationTests.Helpers;
 
-internal static class CallUtilities
+internal static class MasiveCallUtilities
 {
     internal static HttpContent GetCallHttpContent(ICollection<int> numbersIds, int audioId)
     {
@@ -27,10 +27,10 @@ internal static class CallUtilities
         return httpContent;
     }
 
-    internal static async Task<MasiveCall> GetNumberModelFromHttpResponse(HttpResponseMessage response)
+    internal static async Task<MasiveCall> GetMassiveCallsModelFromHttpResponseAsync(HttpResponseMessage response)
     {
-        string numberJson = await response.Content.ReadAsStringAsync();
-        MasiveCall numberModel = JsonConvert.DeserializeObject<MasiveCall>(numberJson)!;
-        return numberModel;
+        string massiveCallsJson = await response.Content.ReadAsStringAsync();
+        MasiveCall massiveCallModel = JsonConvert.DeserializeObject<MasiveCall>(massiveCallsJson)!;
+        return massiveCallModel;
     }
 }
