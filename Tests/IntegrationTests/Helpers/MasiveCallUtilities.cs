@@ -8,14 +8,14 @@ namespace IntegrationTests.Helpers;
 
 internal static class MasiveCallUtilities
 {
-    internal static HttpContent GetCallHttpContent(ICollection<Number> numbersToCall, int audioId)
+    internal static HttpContent GetCallHttpContent(ICollection<int> idsNumbersToCall, int audioId)
     {
-        if (numbersToCall.IsNullOrEmpty())
-            throw new ArgumentException($"{nameof(numbersToCall)} cannot be empty");
+        if (idsNumbersToCall.IsNullOrEmpty())
+            throw new ArgumentException($"{nameof(idsNumbersToCall)} cannot be empty");
 
         MasiveCallCreationDTO call = new MasiveCallCreationDTO 
         {
-            NumbersToCall = numbersToCall,
+            IdsNumbersToCall = idsNumbersToCall,
             AudioId = audioId 
         };
 

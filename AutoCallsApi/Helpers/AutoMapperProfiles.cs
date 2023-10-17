@@ -20,11 +20,11 @@ public class AutoMapperProfiles : Profile
     {
         var calls = new List<Call>();
 
-        foreach (Number number in masiveCallCreationDTO.NumbersToCall)
+        foreach (int numberId in masiveCallCreationDTO.IdsNumbersToCall)
         {
             Call call = new Call
             {
-                NumberId = number.Id,
+                NumberId = numberId,
                 AudioId = masiveCallCreationDTO.AudioId,
             };
             calls.Add(call);
