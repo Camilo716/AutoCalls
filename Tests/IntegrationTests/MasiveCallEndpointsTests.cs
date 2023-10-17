@@ -19,7 +19,7 @@ public partial class EnpointsTests
         var client = _factory.CreateClient();
         HttpContent call = MasiveCallUtilities.GetCallHttpContent
         (
-            idsNumbersToCall: new List<int>(){1, 2, 3},
+            idsNumbersToCall: new int[] {1, 2, 3},
             audioId: 1
         );
 

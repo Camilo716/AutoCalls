@@ -8,7 +8,7 @@ namespace IntegrationTests.Helpers;
 
 internal static class MasiveCallUtilities
 {
-    internal static HttpContent GetCallHttpContent(ICollection<int> idsNumbersToCall, int audioId)
+    internal static HttpContent GetCallHttpContent(int[] idsNumbersToCall, int audioId)
     {
         if (idsNumbersToCall.IsNullOrEmpty())
             throw new ArgumentException($"{nameof(idsNumbersToCall)} cannot be empty");

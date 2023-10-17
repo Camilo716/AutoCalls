@@ -6,7 +6,7 @@ namespace AutoCallsApi.DTOs;
 public class MasiveCallCreationDTO
 {
     [Required]
-    public ICollection<int> IdsNumbersToCall { get; set; }
+    public int[] IdsNumbersToCall { get; set; }
     [Required]
     public int AudioId { get; set; }
 }
