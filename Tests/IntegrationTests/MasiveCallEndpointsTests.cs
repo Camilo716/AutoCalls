@@ -7,6 +7,7 @@ using IntegrationTests.Helpers;
 using AutoCallsApi.Models;
 using System.Collections;
 using Azure;
+using AutoCallsApi.Helpers;
 
 namespace IntegrationTests;
 
@@ -28,5 +29,8 @@ public partial class EnpointsTests
         response.EnsureSuccessStatusCode();
         MasiveCall masiveCall = await MasiveCallUtilities.GetMassiveCallsModelFromHttpResponseAsync(response);
         Assert.Equal(3, masiveCall.Calls.Count);
+        Assert.StartsWith(
+            CallResult.OK.ToString(),
+            masiveCall.Calls.ElementAt(0).Result.ToString());
     }
 }
