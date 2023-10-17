@@ -25,7 +25,6 @@ public class AutoMapperProfiles : Profile
             Call call = new Call
             {
                 NumberId = number.Id,
-                Number = number,
                 AudioId = masiveCallCreationDTO.AudioId,
             };
             calls.Add(call);

@@ -21,10 +21,10 @@ public class EfRepository<TEntity>: IRepository<TEntity> where TEntity: class, I
         return await _entities.ToListAsync();
     }
 
-    public async Task<TEntity> SaveAsync(TEntity number)
+    public async Task<TEntity> SaveAsync(TEntity entity)
     {
-        EntityEntry<TEntity> numberCreated = await _dbContext.AddAsync(number);
+        EntityEntry<TEntity> entityCreated = await _dbContext.AddAsync(entity);
         _dbContext.SaveChanges();
-        return numberCreated.Entity;
+        return entityCreated.Entity;
     }
 }

@@ -50,9 +50,39 @@ namespace AutoCallsApi.Migrations
                     b.Property<int>("AudioId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("MasiveCallId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NumberId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("AudioId");
+
+                    b.HasIndex("MasiveCallId");
+
+                    b.HasIndex("NumberId");
+
                     b.ToTable("Calls");
+                });
+
+            modelBuilder.Entity("AutoCallsApi.Models.MasiveCall", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AudioId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AudioId");
+
+                    b.ToTable("MasiveCalls");
                 });
 
             modelBuilder.Entity("AutoCallsApi.Models.Number", b =>
@@ -63,30 +93,52 @@ namespace AutoCallsApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CallId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("NumberValue")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CallId");
-
                     b.ToTable("Numbers");
-                });
-
-            modelBuilder.Entity("AutoCallsApi.Models.Number", b =>
-                {
-                    b.HasOne("AutoCallsApi.Models.Call", null)
-                        .WithMany("Numbers")
-                        .HasForeignKey("CallId");
                 });
 
             modelBuilder.Entity("AutoCallsApi.Models.Call", b =>
                 {
-                    b.Navigation("Numbers");
+                    b.HasOne("AutoCallsApi.Models.Audio", "Audio")
+                        .WithMany()
+                        .HasForeignKey("AudioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AutoCallsApi.Models.MasiveCall", null)
+                        .WithMany("Calls")
+                        .HasForeignKey("MasiveCallId");
+
+                    b.HasOne("AutoCallsApi.Models.Number", "Number")
+                        .WithMany()
+                        .HasForeignKey("NumberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Audio");
+
+                    b.Navigation("Number");
+                });
+
+            modelBuilder.Entity("AutoCallsApi.Models.MasiveCall", b =>
+                {
+                    b.HasOne("AutoCallsApi.Models.Audio", "Audio")
+                        .WithMany()
+                        .HasForeignKey("AudioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Audio");
+                });
+
+            modelBuilder.Entity("AutoCallsApi.Models.MasiveCall", b =>
+                {
+                    b.Navigation("Calls");
                 });
 #pragma warning restore 612, 618
         }
