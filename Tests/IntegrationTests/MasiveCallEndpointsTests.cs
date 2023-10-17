@@ -1,12 +1,5 @@
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
-using AutoMapper.Configuration.Conventions;
-using Test.Helpers;
 using IntegrationTests.Helpers;
 using AutoCallsApi.Models;
-using System.Collections;
-using Azure;
 using AutoCallsApi.Helpers;
 
 namespace IntegrationTests;
@@ -18,13 +11,12 @@ public partial class EnpointsTests
     public async Task ClientMakeAMasiveCall_ReturnSuccessTest()
     {
         var client = _factory.CreateClient();
-        HttpContent call = MasiveCallUtilities.GetCallHttpContent
-        (
-            idsNumbersToCall: new int[] {1, 2, 3},
+        HttpContent masiveCallHttpContent = MasiveCallUtilities.GetCallHttpContent(
+            idsNumbersToCall: new int[] {31, 32, 33},
             audioId: 1
         );
 
-        HttpResponseMessage response = await client.PostAsync("/api/MasiveCall", call);
+        HttpResponseMessage response = await client.PostAsync("/api/MasiveCall", masiveCallHttpContent);
  
         response.EnsureSuccessStatusCode();
         MasiveCall masiveCall = await MasiveCallUtilities.GetMassiveCallsModelFromHttpResponseAsync(response);

@@ -21,6 +21,13 @@ public class EfRepository<TEntity>: IRepository<TEntity> where TEntity: class, I
         return await _entities.ToListAsync();
     }
 
+    public async Task<TEntity> GetByIdAsync(int id)
+    {
+        TEntity? entity = await _dbContext.FindAsync<TEntity>(id)!;
+
+        return entity ?? throw new KeyNotFoundException($"{typeof(TEntity)} with id {id} not found");
+    }
+
     public async Task<TEntity> SaveAsync(TEntity entity)
     {
         EntityEntry<TEntity> entityCreated = await _dbContext.AddAsync(entity);

@@ -13,6 +13,7 @@ public class Call : IId
 
     [Required]
     public int NumberId { get; set; }
+    [ForeignKey("NumberId")]
     public Number Number { get; set; }
 
     [Required]
