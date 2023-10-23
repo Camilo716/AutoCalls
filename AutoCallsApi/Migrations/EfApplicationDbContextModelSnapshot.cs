@@ -56,13 +56,18 @@ namespace AutoCallsApi.Migrations
                     b.Property<int>("NumberId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("Result")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AudioId");
+                    b.HasIndex("AudioId")
+                        .IsUnique();
 
                     b.HasIndex("MasiveCallId");
 
-                    b.HasIndex("NumberId");
+                    b.HasIndex("NumberId")
+                        .IsUnique();
 
                     b.ToTable("Calls");
                 });
@@ -80,7 +85,8 @@ namespace AutoCallsApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AudioId");
+                    b.HasIndex("AudioId")
+                        .IsUnique();
 
                     b.ToTable("MasiveCalls");
                 });
@@ -105,8 +111,8 @@ namespace AutoCallsApi.Migrations
             modelBuilder.Entity("AutoCallsApi.Models.Call", b =>
                 {
                     b.HasOne("AutoCallsApi.Models.Audio", "Audio")
-                        .WithMany()
-                        .HasForeignKey("AudioId")
+                        .WithOne()
+                        .HasForeignKey("AutoCallsApi.Models.Call", "AudioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -115,8 +121,8 @@ namespace AutoCallsApi.Migrations
                         .HasForeignKey("MasiveCallId");
 
                     b.HasOne("AutoCallsApi.Models.Number", "Number")
-                        .WithMany()
-                        .HasForeignKey("NumberId")
+                        .WithOne()
+                        .HasForeignKey("AutoCallsApi.Models.Call", "NumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -128,8 +134,8 @@ namespace AutoCallsApi.Migrations
             modelBuilder.Entity("AutoCallsApi.Models.MasiveCall", b =>
                 {
                     b.HasOne("AutoCallsApi.Models.Audio", "Audio")
-                        .WithMany()
-                        .HasForeignKey("AudioId")
+                        .WithOne()
+                        .HasForeignKey("AutoCallsApi.Models.MasiveCall", "AudioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

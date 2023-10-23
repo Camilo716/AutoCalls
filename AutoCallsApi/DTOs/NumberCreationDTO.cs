@@ -5,5 +5,5 @@ namespace AutoCallsApi.DTOs;
 public class NumberCreationDTO
 {
     [Required]
-    public int NumberValue { get; set; }
+    public string NumberValue { get; set; }
 }
