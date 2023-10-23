@@ -24,5 +24,8 @@ public partial class EnpointsTests
         Assert.StartsWith(
             CallResult.OK.ToString(),
             masiveCall.Calls.ElementAt(0).Result.ToString());
+        Assert.Contains(
+            "324543256",
+            masiveCall.Calls.ElementAt(0).Number.NumberValue.ToString());
     }
 }
