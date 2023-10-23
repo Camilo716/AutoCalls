@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 internal static class NumberUtilities
 {
-    internal static HttpContent GetNumberHttpContent(int numberValue)
+    internal static HttpContent GetNumberHttpContent(string numberValue)
     {
         NumberCreationDTO number = new NumberCreationDTO { NumberValue = numberValue };
         string jsonContent = JsonConvert.SerializeObject(number);
