@@ -19,6 +19,12 @@ public class MasiveCallController: ControllerBase
         _mapper = mapper;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<List<MasiveCall>>> GetAsync()
+    {
+        return await _callService.GetMasiveCallsAsync();
+    }
+
     [HttpPost]
     public async Task<ActionResult<MasiveCall>> PostAsync([FromBody] MasiveCallCreationDTO masiveCallCreationDTO)
     {

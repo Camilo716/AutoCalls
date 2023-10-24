@@ -3,6 +3,7 @@ using AutoCallsApi.DTOs;
 using AutoCallsApi.Helpers;
 using AutoCallsApi.Models;
 using EventSocketLibrary.ClientESL;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AutoCallsApi.Services;
 
@@ -18,6 +19,11 @@ public class MasiveCallService
         _clientESL = clientESL;
         _numberRepository = numberRepository;
     }  
+
+    public async Task<ActionResult<List<MasiveCall>>> GetMasiveCallsAsync()
+    {
+        return await _masiveCallRepository.GetAllAsync();
+    }
 
     public async Task<MasiveCall> PostMasiveCallAsync(MasiveCall masiveCall)
     {

@@ -20,6 +20,7 @@ public partial class EnpointsTests
 
     [Theory]
     [InlineData("/api/number")]
+    [InlineData("/api/masiveCall")]
     public async Task ClientGetAll_ReturnSuccessTest(string url)
     {
         var client = _factory.CreateClient();
