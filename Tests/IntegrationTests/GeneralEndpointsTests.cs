@@ -1,6 +1,7 @@
 using AutoCallsApi.Data.EntityFramework;
-using Test.Helpers;
 using IntegrationTests.Helpers;
+using IntegrationTests.Helpers.Database;
+using Test.Helpers.Database;
 
 namespace IntegrationTests;
 
@@ -9,12 +10,13 @@ public partial class EnpointsTests
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     private readonly EfApplicationDbContext _context;
+    private readonly SeedDataIds _seedDataIds;
 
     public EnpointsTests(CustomWebApplicationFactory<Program> factory)
     {
         _factory = factory;
         _context = DbContextUtilities.GetDbContext(factory);
-        DbUtilities.ReinitializeDbForTests(_context);
+        _seedDataIds = DbUtilities.ReinitializeDbForTests(_context);
     }
 
     [Theory]

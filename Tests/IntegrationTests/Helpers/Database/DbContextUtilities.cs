@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using AutoCallsApi.Data.EntityFramework;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IntegrationTests.Helpers;
+namespace IntegrationTests.Helpers.Database;
 
 public static class DbContextUtilities
 {

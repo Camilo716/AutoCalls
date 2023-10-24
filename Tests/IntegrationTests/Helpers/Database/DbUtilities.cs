@@ -1,9 +1,10 @@
 using System.Reflection;
 using AutoCallsApi.Data.EntityFramework;
 using AutoCallsApi.Models;
+using IntegrationTests.Helpers.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace Test.Helpers;
+namespace Test.Helpers.Database;
 
 public static class DbUtilities
 {
@@ -15,20 +16,27 @@ public static class DbUtilities
         return counter;
     }
 
-    public static void ReinitializeDbForTests(EfApplicationDbContext db)
+    public static SeedDataIds ReinitializeDbForTests(EfApplicationDbContext db)
     {
         // throw new Exception(db.ContextId.ToString());
+        db.MasiveCalls.RemoveRange(db.MasiveCalls);
+        db.Calls.RemoveRange(db.Calls);
         db.Numbers.RemoveRange(db.Numbers);
-        InitializeDbForTests(db);
+        db.Audios.RemoveRange(db.Audios);
+        return InitializeDbForTests(db);
     }
 
-    private static void InitializeDbForTests(EfApplicationDbContext db)
+    private static SeedDataIds InitializeDbForTests(EfApplicationDbContext db)
     {
         var seedNumbers = GetSeedingNumbers();
         var seedAudios = GetSeedingAudios();
         db.Numbers.AddRange(seedNumbers);
         db.Audios.AddRange(seedAudios);
         db.SaveChanges();
+
+        List<int> seedNumbersIds = seedNumbers.Select(n => n.Id).ToList();
+        List<int> seedAudiosIds = seedAudios.Select(a => a.Id).ToList();
+        return new SeedDataIds(seedNumbersIds, seedAudiosIds);
     }
 
     private static List<Number> GetSeedingNumbers()

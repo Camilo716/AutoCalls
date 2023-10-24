@@ -12,8 +12,12 @@ public partial class EnpointsTests
     {
         var client = _factory.CreateClient();
         HttpContent masiveCallHttpContent = MasiveCallUtilities.GetCallHttpContent(
-            idsNumbersToCall: new int[] {31, 32, 33},
-            audioId: 1
+            idsNumbersToCall: new int[] {
+                _seedDataIds.NumbersIds[0],
+                _seedDataIds.NumbersIds[1],
+                _seedDataIds.NumbersIds[2],
+                },
+            audioId: _seedDataIds.AudiosIds[0]
         );
 
         HttpResponseMessage response = await client.PostAsync("/api/MasiveCall", masiveCallHttpContent);
