@@ -23,10 +23,13 @@ public partial class EnpointsTests
  
         response.EnsureSuccessStatusCode();
         MasiveCall masiveCall = await MasiveCallUtilities.GetMassiveCallsModelFromHttpResponseAsync(response);
-        Assert.Equal(3, masiveCall.Calls.Count);
+        // Made all calls
+        Assert.Equal(idsNumbersToCall.Length, masiveCall.Calls.Count);
+        // Calls succeed 
         Assert.StartsWith(
             CallResult.OK.ToString(),
             masiveCall.Calls.ElementAt(0).Result.ToString());
+        // Called correct numbers
         Assert.Contains(
             _context.Numbers.FirstOrDefault(n => n.Id == idsNumbersToCall[0])!.NumberValue,
             masiveCall.Calls.ElementAt(0).Number.NumberValue.ToString());

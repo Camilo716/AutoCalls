@@ -10,13 +10,12 @@ public partial class EnpointsTests
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     private readonly EfApplicationDbContext _context;
-    private readonly SeedDataIds _seedDataIds;
 
     public EnpointsTests(CustomWebApplicationFactory<Program> factory)
     {
         _factory = factory;
         _context = DbContextUtilities.GetDbContext(factory);
-        _seedDataIds = DbUtilities.ReinitializeDbForTests(_context);
+        DbUtilities.ReinitializeDbForTests(_context);
     }
 
     [Theory]
