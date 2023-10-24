@@ -1,6 +1,7 @@
 using IntegrationTests.Helpers;
 using AutoCallsApi.Models;
 using AutoCallsApi.Helpers;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace IntegrationTests;
 
@@ -10,14 +11,12 @@ public partial class EnpointsTests
     [Fact]
     public async Task ClientMakeAMasiveCall_ReturnSuccessTest()
     {
+        int[] idsNumbersToCall = _context.Numbers.Select(n => n.Id).ToArray();
+        int idAudioToReproduce = _context.Audios.Select(n => n.Id).FirstOrDefault();
         var client = _factory.CreateClient();
         HttpContent masiveCallHttpContent = MasiveCallUtilities.GetCallHttpContent(
-            idsNumbersToCall: new int[] {
-                _seedDataIds.NumbersIds[0],
-                _seedDataIds.NumbersIds[1],
-                _seedDataIds.NumbersIds[2],
-                },
-            audioId: _seedDataIds.AudiosIds[0]
+            idsNumbersToCall: idsNumbersToCall,
+            audioId: idAudioToReproduce
         );
 
         HttpResponseMessage response = await client.PostAsync("/api/MasiveCall", masiveCallHttpContent);
@@ -29,7 +28,7 @@ public partial class EnpointsTests
             CallResult.OK.ToString(),
             masiveCall.Calls.ElementAt(0).Result.ToString());
         Assert.Contains(
-            "324543256",
+            _context.Numbers.FirstOrDefault(n => n.Id == idsNumbersToCall[0])!.NumberValue,
             masiveCall.Calls.ElementAt(0).Number.NumberValue.ToString());
     }
 }
