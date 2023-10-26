@@ -9,13 +9,13 @@ public class Call : IId
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    public CallResult? Result { get; set; }
+    [Required]
+    public string Result { get; set; }
 
     [Required]
     public int NumberId { get; set; }
     [ForeignKey("NumberId")]
     public Number Number { get; set; }
-
     [Required]
     public int AudioId { get; set; }
     public Audio Audio { get; set; }

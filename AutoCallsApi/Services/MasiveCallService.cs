@@ -38,8 +38,8 @@ public class MasiveCallService
             string response = _clientESL.Call(call.Number.NumberValue, "&echo()");
 
             call.Result = response.StartsWith("+OK")
-                ? CallResult.OK 
-                : CallResult.ERR;
+                ? CallResult.OK.ToString() 
+                : CallResult.ERR.ToString();
         }
     
         return await _masiveCallRepository.SaveAsync(masiveCall);
