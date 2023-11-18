@@ -1,4 +1,5 @@
 using AutoCallsApi.Data.EntityFramework;
+using AutoCallsApi.Services.Reproducer;
 using EventSocketLibrary.ClientESL;
 using IntegrationTests.Helpers.ESL;
 using Microsoft.AspNetCore.Hosting;
@@ -27,12 +28,13 @@ public class CustomWebApplicationFactory<TProgram>
                 options.UseInMemoryDatabase(new Guid().ToString());
             });
 
-            ServiceDescriptor? IClientESLContextDescriptor = services.SingleOrDefault(
-                s => s.ServiceType == typeof(IClientESL)
-            );
-            services.Remove(IClientESLContextDescriptor!);
 
-            services.AddSingleton<IClientESL>(new DumbClientESL());
+            ServiceDescriptor? IAudioReproducerFactoryDescriptor = services.SingleOrDefault(
+                s => s.ServiceType == typeof(IAudioReproducerFactory)
+            );
+            services.Remove(IAudioReproducerFactoryDescriptor!);
+
+            services.AddSingleton<IAudioReproducerFactory, DumbAudioReproducerFactory>();
         });
     }
 }

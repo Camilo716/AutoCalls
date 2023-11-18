@@ -4,7 +4,7 @@ using EventSocketLibrary.Util.Util;
 
 namespace EventSocketLibrary.ClientESL;
 
-public class ClientESL : IClientESL
+public class ClientESL : IAudioReproducer
 {
     private Socket _socket;
     private string HOST;
@@ -42,6 +42,17 @@ public class ClientESL : IClientESL
     public string Call(string number, string args = "")
     {
         string apiCommand = $"api originate {number} {args}";
+        SendData(apiCommand);
+
+        string headerResponse = RecolectHeaderResponse();
+        string bodyResponse = RecolectBodyResponse(headerResponse);
+
+        return bodyResponse;
+    }
+
+    public string Reproduce(string number, string audioRoute)
+    {
+        string apiCommand = $"api originate {number} &playback({audioRoute})";
         SendData(apiCommand);
 
         string headerResponse = RecolectHeaderResponse();

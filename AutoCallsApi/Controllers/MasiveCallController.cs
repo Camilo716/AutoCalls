@@ -29,7 +29,7 @@ public class MasiveCallController: ControllerBase
     public async Task<ActionResult<MasiveCall>> PostAsync([FromBody] MasiveCallCreationDTO masiveCallCreationDTO)
     {
         MasiveCall call = _mapper.Map<MasiveCall>(masiveCallCreationDTO);
-        MasiveCall callPosted = await _callService.PostMasiveCallAsync(call);
+        MasiveCall callPosted = await _callService.MakeMasiveCallAsync(call);
         return Ok(callPosted);
     }
 }

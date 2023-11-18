@@ -1,9 +1,6 @@
 namespace EventSocketLibrary.ClientESL;
 
-public interface IClientESL
+public interface IAudioReproducer
 {
-    void Connect();
-    void CloseConnection();
-    string Authenticate(string password);
-    string Call(string number, string args = "");
+    string Reproduce(string number, string audioRoute);
 }

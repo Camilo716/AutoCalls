@@ -1,7 +1,9 @@
+using System.Runtime.CompilerServices;
 using AutoCallsApi.Data;
 using AutoCallsApi.Data.EntityFramework;
 using AutoCallsApi.Models;
 using AutoCallsApi.Services;
+using AutoCallsApi.Services.Reproducer;
 using EventSocketLibrary.ClientESL;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,12 +31,12 @@ public class Startup
         services.AddScoped<IRepository<MasiveCall>, EfRepository<MasiveCall>>();
         services.AddScoped<MasiveCallService>();
         
-        services.AddSingleton<IClientESL>(
-            new ClientESL(
-                _config["FreeSwitchHost"]!,
-                Convert.ToInt32(_config["FreeSwitchPort"])
-            )
-        );
+        services.AddSingleton<IAudioReproducerFactory, FreeSwitchAudioReproducerFactory>();
+        services.AddSingleton<IAudioReproducer>(provider =>
+        {
+            var audioReproducerFactory = provider.GetRequiredService<IAudioReproducerFactory>();
+            return audioReproducerFactory.Initialize(_config); 
+        });
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

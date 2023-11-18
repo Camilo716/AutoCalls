@@ -11,12 +11,12 @@ public class MasiveCallService
 {
     private readonly IRepository<MasiveCall> _masiveCallRepository;
     private readonly IRepository<Number> _numberRepository;
-    private readonly IClientESL _clientESL;
+    private readonly IAudioReproducer _audioReproducer;
     
-    public MasiveCallService(IRepository<MasiveCall> masiveCallRepository, IClientESL clientESL, IRepository<Number> numberRepository)
+    public MasiveCallService(IRepository<MasiveCall> masiveCallRepository, IAudioReproducer clientESL, IRepository<Number> numberRepository)
     {
         _masiveCallRepository = masiveCallRepository;
-        _clientESL = clientESL;
+        _audioReproducer = clientESL;
         _numberRepository = numberRepository;
     }  
 
@@ -25,23 +25,20 @@ public class MasiveCallService
         return await _masiveCallRepository.GetAllAsync();
     }
 
-    public async Task<MasiveCall> PostMasiveCallAsync(MasiveCall masiveCall)
+    public async Task<MasiveCall> MakeMasiveCallAsync(MasiveCall masiveCall)
     {
-        _clientESL.Connect();
-        _clientESL.Authenticate("ClueCon");
-
         foreach (Call call in masiveCall.Calls)
         {
             Number number = await _numberRepository.GetByIdAsync(call.NumberId);
             call.Number = number;
 
-            string response = _clientESL.Call(call.Number.NumberValue, "&echo()");
+            string response = _audioReproducer.Reproduce(call.Number.NumberValue, "Route...WIP");
 
             call.Result = response.StartsWith("+OK")
                 ? CallResult.OK.ToString() 
                 : CallResult.ERR.ToString();
         }
-    
+
         return await _masiveCallRepository.SaveAsync(masiveCall);
     }
 }
