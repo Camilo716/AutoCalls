@@ -40,9 +40,9 @@ public static class DbUtilities
     {
         return new List<Number>()
         {
-            new Number(){ NumberValue= "324543256"},
-            new Number(){ NumberValue= "315432166"},
-            new Number(){ NumberValue= "356782560"},
+            new(){ NumberValue= "324543256"},
+            new(){ NumberValue= "315432166"},
+            new(){ NumberValue= "356782560"},
         };
     }
 
@@ -50,7 +50,7 @@ public static class DbUtilities
     {
         return new List<Audio>()
         {
-            new Audio(){ AudioData = File.ReadAllBytes("../../../Helpers/Audios/testing-audio.mp3") }
+            new Audio(){ AudioData = File.ReadAllBytes("../../../Helpers/Audios/ValidFiles/testing-audio.mp3") }
         };
     }
 }

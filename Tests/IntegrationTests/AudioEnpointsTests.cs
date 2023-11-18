@@ -11,7 +11,8 @@ namespace IntegrationTests;
 public partial class EnpointsTests
 {
     [Theory]
-    [InlineData("../../../Helpers/Audios/testing-audio.mp3", "testing-audio.mp3")]
+    [InlineData("../../../Helpers/Audios/ValidFiles/testing-audio.mp3", "testing-audio.mp3")]
+    [InlineData("../../../Helpers/Audios/ValidFiles/testing-audio.wav", "testing-audio.wav")]
     public async Task ClientPostValidAudio_ReturnSuccessTest(string fileRoute, string fileName)
     {
         var client = _factory.CreateClient();
