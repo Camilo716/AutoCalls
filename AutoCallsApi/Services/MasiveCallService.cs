@@ -13,10 +13,10 @@ public class MasiveCallService
     private readonly IRepository<Number> _numberRepository;
     private readonly IAudioReproducer _audioReproducer;
     
-    public MasiveCallService(IRepository<MasiveCall> masiveCallRepository, IAudioReproducer clientESL, IRepository<Number> numberRepository)
+    public MasiveCallService(IRepository<MasiveCall> masiveCallRepository, IAudioReproducer audioReproducer, IRepository<Number> numberRepository)
     {
         _masiveCallRepository = masiveCallRepository;
-        _audioReproducer = clientESL;
+        _audioReproducer = audioReproducer;
         _numberRepository = numberRepository;
     }  
 
