@@ -31,7 +31,7 @@ public class EfRepository<TEntity>: IRepository<TEntity> where TEntity: class, I
     public async Task<TEntity> SaveAsync(TEntity entity)
     {
         EntityEntry<TEntity> entityCreated = await _dbContext.AddAsync(entity);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
         return entityCreated.Entity;
     }
 }

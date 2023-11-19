@@ -12,7 +12,7 @@ public class LocalFileStorage : IFileStorage
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<string> SaveFile(byte[] content, string extension, string container, string contentType)
+    public async Task<StorageUrl> SaveFile(byte[] content, string extension, string container, string contentType)
     {
         string fileName = $"{Guid.NewGuid()}{extension}";
     
@@ -24,12 +24,14 @@ public class LocalFileStorage : IFileStorage
         await File.WriteAllBytesAsync(route, content);
 
         HttpRequest requestContextAccessor = _httpContextAccessor.HttpContext.Request;
-        string baseUrl = $"{requestContextAccessor.Scheme}://{requestContextAccessor.Host}";
-        string urlForDatbase = Path.Combine(baseUrl, container, fileName).Replace("\\", "/");
-        return urlForDatbase;
+        return new StorageUrl()
+        {
+            BaseUrl = $"{requestContextAccessor.Scheme}://{requestContextAccessor.Host}".Replace("\\", "/"),
+            Route = Path.Combine(container, fileName)
+        };
     }
 
-    public async Task<string> EditFile(byte[] content, string extension, string container, string route, string contentType)
+    public async Task<StorageUrl> EditFile(byte[] content, string extension, string container, string route, string contentType)
     {
         await DeleteFile(route, container);
         return await SaveFile(content, extension, container, contentType);

@@ -25,10 +25,11 @@ public class AudioService
 
         string extension = Path.GetExtension(audioFile.FileName);
 
+        StorageUrl storageUrl = await _fileStorage.SaveFile(
+                audioData, extension, _container, audioFile.ContentType);
         var audioEntity = new Audio
         {
-            AudioUrl = await _fileStorage.SaveFile(
-                audioData, extension, _container, audioFile.ContentType)
+            AudioUrl = storageUrl.Route 
         };
 
         return await _repository.SaveAsync(audioEntity);
