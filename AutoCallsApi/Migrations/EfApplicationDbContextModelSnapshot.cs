@@ -62,8 +62,7 @@ namespace AutoCallsApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AudioId")
-                        .IsUnique();
+                    b.HasIndex("AudioId");
 
                     b.HasIndex("MasiveCallId");
 
@@ -86,8 +85,7 @@ namespace AutoCallsApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AudioId")
-                        .IsUnique();
+                    b.HasIndex("AudioId");
 
                     b.ToTable("MasiveCalls");
                 });
@@ -112,8 +110,8 @@ namespace AutoCallsApi.Migrations
             modelBuilder.Entity("AutoCallsApi.Models.Call", b =>
                 {
                     b.HasOne("AutoCallsApi.Models.Audio", "Audio")
-                        .WithOne()
-                        .HasForeignKey("AutoCallsApi.Models.Call", "AudioId")
+                        .WithMany()
+                        .HasForeignKey("AudioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -135,8 +133,8 @@ namespace AutoCallsApi.Migrations
             modelBuilder.Entity("AutoCallsApi.Models.MasiveCall", b =>
                 {
                     b.HasOne("AutoCallsApi.Models.Audio", "Audio")
-                        .WithOne()
-                        .HasForeignKey("AutoCallsApi.Models.MasiveCall", "AudioId")
+                        .WithMany()
+                        .HasForeignKey("AudioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

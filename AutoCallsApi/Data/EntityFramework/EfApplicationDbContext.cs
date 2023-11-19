@@ -23,8 +23,8 @@ public class EfApplicationDbContext : DbContext
 
         modelBuilder.Entity<MasiveCall>()          
             .HasOne(masiveC => masiveC.Audio)
-            .WithOne()
-            .HasForeignKey<MasiveCall>(masiveC => masiveC.AudioId);
+            .WithMany()
+            .HasForeignKey(masiveC => masiveC.AudioId);
         
         modelBuilder.Entity<Call>()
             .HasOne(call => call.Number)
@@ -33,7 +33,7 @@ public class EfApplicationDbContext : DbContext
 
         modelBuilder.Entity<Call>()
             .HasOne(call => call.Audio)
-            .WithOne()
-            .HasForeignKey<Call>(call => call.AudioId);
+            .WithMany()
+            .HasForeignKey(call => call.AudioId);
     }
 }
