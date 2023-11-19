@@ -32,7 +32,7 @@ public class MasiveCallService
             Number number = await _numberRepository.GetByIdAsync(call.NumberId);
             call.Number = number;
 
-            string response = _audioReproducer.Reproduce(call.Number.NumberValue, "Route...WIP");
+            string response = _audioReproducer.Reproduce(call.Number.NumberValue, "/var/Audios/testing-audio.wav");
 
             call.Result = response.StartsWith("+OK")
                 ? CallResult.OK.ToString() 
