@@ -66,8 +66,7 @@ namespace AutoCallsApi.Migrations
 
                     b.HasIndex("MasiveCallId");
 
-                    b.HasIndex("NumberId")
-                        .IsUnique();
+                    b.HasIndex("NumberId");
 
                     b.ToTable("Calls");
                 });
@@ -120,8 +119,8 @@ namespace AutoCallsApi.Migrations
                         .HasForeignKey("MasiveCallId");
 
                     b.HasOne("AutoCallsApi.Models.Number", "Number")
-                        .WithOne()
-                        .HasForeignKey("AutoCallsApi.Models.Call", "NumberId")
+                        .WithMany()
+                        .HasForeignKey("NumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

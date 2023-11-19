@@ -28,8 +28,8 @@ public class EfApplicationDbContext : DbContext
         
         modelBuilder.Entity<Call>()
             .HasOne(call => call.Number)
-            .WithOne()
-            .HasForeignKey<Call>(call => call.NumberId);
+            .WithMany()
+            .HasForeignKey(call => call.NumberId);
 
         modelBuilder.Entity<Call>()
             .HasOne(call => call.Audio)

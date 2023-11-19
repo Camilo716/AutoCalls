@@ -27,7 +27,7 @@ public class LocalFileStorage : IFileStorage
         return new StorageUrl()
         {
             BaseUrl = $"{requestContextAccessor.Scheme}://{requestContextAccessor.Host}".Replace("\\", "/"),
-            Route = Path.Combine(container, fileName)
+            Route = "/" + Path.Combine(container, fileName)
         };
     }
 
