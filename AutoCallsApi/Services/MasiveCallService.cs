@@ -33,15 +33,15 @@ public class MasiveCallService
 
     public async Task<MasiveCall> MakeMasiveCallAsync(MasiveCall masiveCall)
     {
-        // Audio audio = _audioRepository.GetByIdAsync(masiveCall.AudioId);
-        // masiveCall.Audio = audio;
+        Audio audio = await _audioRepository.GetByIdAsync(masiveCall.AudioId);
+        masiveCall.Audio = audio;
 
         foreach (Call call in masiveCall.Calls)
         {
             Number number = await _numberRepository.GetByIdAsync(call.NumberId);
             call.Number = number;
 
-            string response = _audioReproducer.Reproduce(call.Number.NumberValue, "/var/Audios/testing-audio.wav");
+            string response = _audioReproducer.Reproduce(call.Number.NumberValue, masiveCall.Audio.AudioUrl);
 
             call.Result = response.StartsWith("+OK")
                 ? CallResult.OK.ToString() 
