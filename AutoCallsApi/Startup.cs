@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using AutoCallsApi.Data;
 using AutoCallsApi.Data.EntityFramework;
+using AutoCallsApi.Data.FileStorage;
 using AutoCallsApi.Models;
 using AutoCallsApi.Services;
 using AutoCallsApi.Services.Reproducer;
@@ -30,7 +31,10 @@ public class Startup
         services.AddScoped<AudioService>();
         services.AddScoped<IRepository<MasiveCall>, EfRepository<MasiveCall>>();
         services.AddScoped<MasiveCallService>();
-        
+
+        services.AddHttpContextAccessor();
+        services.AddTransient<IFileStorage, LocalFileStorage>();
+
         services.AddSingleton<IAudioReproducerFactory, FreeSwitchAudioReproducerFactory>();
         services.AddSingleton<IAudioReproducer>(provider =>
         {

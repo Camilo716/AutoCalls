@@ -16,11 +16,11 @@ public class LocalFileStorage : IFileStorage
     {
         string fileName = $"{Guid.NewGuid()}{extension}";
     
-        string folder = Path.Combine(_webHostEnv.WebRootPath, container);
-        if(!Directory.Exists(folder))
-            Directory.CreateDirectory(folder);
+        string directory = Path.Combine(_webHostEnv.WebRootPath, container);
+        if(!Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
 
-        string route = Path.Combine(folder, fileName);
+        string route = Path.Combine(directory, fileName);
         await File.WriteAllBytesAsync(route, content);
 
         HttpRequest requestContextAccessor = _httpContextAccessor.HttpContext.Request;
@@ -29,13 +29,23 @@ public class LocalFileStorage : IFileStorage
         return urlForDatbase;
     }
 
-    public Task<string> EditFile(byte[] content, string extension, string container, string route, string contentType)
+    public async Task<string> EditFile(byte[] content, string extension, string container, string route, string contentType)
     {
-        throw new NotImplementedException();
+        await DeleteFile(route, container);
+        return await SaveFile(content, extension, container, contentType);
     }
 
-    public Task<string> DeleteFile(string container, string route)
+    public Task DeleteFile(string container, string route)
     {
-        throw new NotImplementedException();
+        if (route == null)
+            throw new ArgumentNullException();
+
+        string fileName = Path.GetFileName(route);
+        string directoryFile = Path.Combine(_webHostEnv.WebRootPath, container, fileName);
+        if(!File.Exists(directoryFile))
+            throw new FileNotFoundException();
+
+        File.Delete(directoryFile);
+        return Task.FromResult(0);
     }
 }

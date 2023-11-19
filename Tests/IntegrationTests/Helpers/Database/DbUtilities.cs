@@ -50,7 +50,6 @@ public static class DbUtilities
     {
         return new List<Audio>()
         {
-            new Audio(){ AudioData = File.ReadAllBytes("../../../Helpers/Audios/ValidFiles/testing-audio.mp3") }
         };
     }
 }

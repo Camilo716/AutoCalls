@@ -30,9 +30,9 @@ namespace AutoCallsApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<byte[]>("AudioData")
+                    b.Property<string>("AudioUrl")
                         .IsRequired()
-                        .HasColumnType("bytea");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -56,8 +56,9 @@ namespace AutoCallsApi.Migrations
                     b.Property<int>("NumberId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Result")
-                        .HasColumnType("integer");
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

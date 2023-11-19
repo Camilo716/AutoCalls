@@ -478,3 +478,4 @@ $RECYCLE.BIN/
 
 /AutoCallsApi/Migrations/*
 /.vscode*
+/AutoCallsApi/wwwroot/audios/*

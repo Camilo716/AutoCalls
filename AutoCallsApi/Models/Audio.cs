@@ -6,5 +6,5 @@ public class Audio : IId
 {
     public int Id { get; set ; }
     [Required]
-    public byte[] AudioData { get; set; }
+    public string AudioUrl { get; set;}
 }
