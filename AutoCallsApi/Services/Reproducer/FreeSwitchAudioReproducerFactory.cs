@@ -1,5 +1,4 @@
 using EventSocketLibrary.ClientESL;
-using Microsoft.Identity.Client;
 
 namespace AutoCallsApi.Services.Reproducer;
 

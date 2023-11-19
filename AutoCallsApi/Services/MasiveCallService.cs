@@ -13,10 +13,10 @@ public class MasiveCallService
     private readonly IRepository<Number> _numberRepository;
     private readonly IRepository<Audio> _audioRepository;
     private readonly IAudioReproducer _audioReproducer;
-    
+
     public MasiveCallService(
         IRepository<MasiveCall> masiveCallRepository,
-        IAudioReproducer audioReproducer, 
+        IAudioReproducer audioReproducer,
         IRepository<Number> numberRepository,
         IRepository<Audio> audioRepository)
     {
@@ -24,7 +24,7 @@ public class MasiveCallService
         _audioReproducer = audioReproducer;
         _numberRepository = numberRepository;
         _audioRepository = audioRepository;
-    }  
+    }
 
     public async Task<ActionResult<List<MasiveCall>>> GetMasiveCallsAsync()
     {
@@ -44,7 +44,7 @@ public class MasiveCallService
             string response = _audioReproducer.Reproduce(call.Number.NumberValue, masiveCall.Audio.AudioUrl);
 
             call.Result = response.StartsWith("+OK")
-                ? CallResult.OK.ToString() 
+                ? CallResult.OK.ToString()
                 : CallResult.ERR.ToString();
         }
 
