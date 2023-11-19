@@ -6,14 +6,15 @@ public class FreeSwitchAudioReproducerFactory : IAudioReproducerFactory
 {
     public IAudioReproducer Initialize(IConfiguration config)
     {
-        var caller = new ClientESL(
+        var fsClient = new ClientESL(
             config["FreeSwitchHost"]!,
             Convert.ToInt32(config["FreeSwitchPort"])
         );
 
-        caller.Connect();
-        caller.Authenticate("ClueCon");
+        fsClient.Connect();
+        fsClient.Authenticate("ClueCon");
 
-        return caller;
+        var freeswitchAudioPlayer = new FreeswitchAudioPlayer(fsClient);
+        return freeswitchAudioPlayer;
     }
 }
