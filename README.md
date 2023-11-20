@@ -53,9 +53,9 @@ cd ./FreeSWITCH
 docker-compose up
 ```
 
-
 ## Run the API
-```
+
+``` bash
 
 cd ./AutoCallsApi
 dotnet run
