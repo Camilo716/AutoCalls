@@ -1,7 +1,7 @@
 using AutoCallsApi.Data;
 using AutoCallsApi.Helpers;
 using AutoCallsApi.Models;
-using AutoCallsApi.Services.Reproducer;
+using AutoCallsApi.Services.AudioPlayer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutoCallsApi.Services;
@@ -11,16 +11,16 @@ public class MasiveCallService
     private readonly IRepository<MasiveCall> _masiveCallRepository;
     private readonly IRepository<Number> _numberRepository;
     private readonly IRepository<Audio> _audioRepository;
-    private readonly IAudioReproducer _audioReproducer;
+    private readonly IPlayableAudio _audioPlayer;
 
     public MasiveCallService(
         IRepository<MasiveCall> masiveCallRepository,
-        IAudioReproducer audioReproducer,
+        IPlayableAudio audioPlayer,
         IRepository<Number> numberRepository,
         IRepository<Audio> audioRepository)
     {
         _masiveCallRepository = masiveCallRepository;
-        _audioReproducer = audioReproducer;
+        _audioPlayer = audioPlayer;
         _numberRepository = numberRepository;
         _audioRepository = audioRepository;
     }
@@ -40,7 +40,7 @@ public class MasiveCallService
             Number number = await _numberRepository.GetByIdAsync(call.NumberId);
             call.Number = number;
 
-            string response = _audioReproducer.Reproduce(call.Number.NumberValue, masiveCall.Audio.AudioUrl);
+            string response = _audioPlayer.PlayAudio(call.Number.NumberValue, masiveCall.Audio.AudioUrl);
 
             call.Result = response.StartsWith("+OK")
                 ? CallResult.OK.ToString()

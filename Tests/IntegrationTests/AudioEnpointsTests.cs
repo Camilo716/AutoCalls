@@ -1,9 +1,5 @@
 using System.Net;
-using System.Runtime.CompilerServices;
-using AutoMapper.Configuration.Conventions;
-using Test.Helpers;
 using IntegrationTests.Helpers;
-using AutoCallsApi.Models;
 
 namespace IntegrationTests;
 

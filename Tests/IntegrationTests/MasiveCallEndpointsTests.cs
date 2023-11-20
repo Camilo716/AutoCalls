@@ -1,7 +1,6 @@
 using IntegrationTests.Helpers;
 using AutoCallsApi.Models;
 using AutoCallsApi.Helpers;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace IntegrationTests;
 

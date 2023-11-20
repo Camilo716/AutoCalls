@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace AutoCallsApi.Validators.FileValidators;
 
 public static class FileExtensionValidator

@@ -1,10 +1,10 @@
 using EventSocketLibrary.ClientESL;
 
-namespace AutoCallsApi.Services.Reproducer;
+namespace AutoCallsApi.Services.AudioPlayer;
 
-public class FreeSwitchAudioReproducerFactory : IAudioReproducerFactory
+public class FreeSwitchAudioPlayerFactory : IAudioPlayerFactory
 {
-    public IAudioReproducer Initialize(IConfiguration config)
+    public IPlayableAudio Initialize(IConfiguration config)
     {
         var fsClient = new ClientESL(
             config["FreeSwitchHost"]!,

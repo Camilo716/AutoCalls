@@ -1,9 +1,8 @@
 using EventSocketLibrary;
-using EventSocketLibrary.ClientESL;
 
-namespace AutoCallsApi.Services.Reproducer;
+namespace AutoCallsApi.Services.AudioPlayer;
 
-public class FreeswitchAudioPlayer : IAudioReproducer
+public class FreeswitchAudioPlayer : IPlayableAudio
 {
     private readonly IDialer _dialer;
 
@@ -12,7 +11,7 @@ public class FreeswitchAudioPlayer : IAudioReproducer
         _dialer = dialer;
     }
 
-    public string Reproduce(string number, string audioRoute)
+    public string PlayAudio(string number, string audioRoute)
     {
         return _dialer.Call(number, $"&playback({audioRoute}");
     }

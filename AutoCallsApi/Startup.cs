@@ -1,11 +1,9 @@
-using System.Runtime.CompilerServices;
 using AutoCallsApi.Data;
 using AutoCallsApi.Data.EntityFramework;
 using AutoCallsApi.Data.FileStorage;
 using AutoCallsApi.Models;
 using AutoCallsApi.Services;
-using AutoCallsApi.Services.Reproducer;
-using EventSocketLibrary.ClientESL;
+using AutoCallsApi.Services.AudioPlayer;
 using Microsoft.EntityFrameworkCore;
 
 public class Startup
@@ -35,10 +33,10 @@ public class Startup
         services.AddHttpContextAccessor();
         services.AddTransient<IFileStorage, LocalFileStorage>();
 
-        services.AddSingleton<IAudioReproducerFactory, FreeSwitchAudioReproducerFactory>();
-        services.AddSingleton<IAudioReproducer>(provider =>
+        services.AddSingleton<IAudioPlayerFactory, FreeSwitchAudioPlayerFactory>();
+        services.AddSingleton<IPlayableAudio>(provider =>
         {
-            var audioReproducerFactory = provider.GetRequiredService<IAudioReproducerFactory>();
+            var audioReproducerFactory = provider.GetRequiredService<IAudioPlayerFactory>();
             return audioReproducerFactory.Initialize(_config); 
         });
 

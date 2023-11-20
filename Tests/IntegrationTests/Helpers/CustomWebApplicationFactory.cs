@@ -1,6 +1,5 @@
 using AutoCallsApi.Data.EntityFramework;
-using AutoCallsApi.Services.Reproducer;
-using EventSocketLibrary.ClientESL;
+using AutoCallsApi.Services.AudioPlayer;
 using IntegrationTests.Helpers.ESL;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -29,12 +28,12 @@ public class CustomWebApplicationFactory<TProgram>
             });
 
 
-            ServiceDescriptor? IAudioReproducerFactoryDescriptor = services.SingleOrDefault(
-                s => s.ServiceType == typeof(IAudioReproducerFactory)
+            ServiceDescriptor? IAudioPlayerFactoryDescriptor = services.SingleOrDefault(
+                s => s.ServiceType == typeof(IAudioPlayerFactory)
             );
-            services.Remove(IAudioReproducerFactoryDescriptor!);
+            services.Remove(IAudioPlayerFactoryDescriptor!);
 
-            services.AddSingleton<IAudioReproducerFactory, DumbAudioReproducerFactory>();
+            services.AddSingleton<IAudioPlayerFactory, DumbAudioPlayerFactory>();
         });
     }
 }

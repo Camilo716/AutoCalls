@@ -1,6 +1,3 @@
-using AutoCallsApi.Models;
-using Test.Helpers;
-
 namespace IntegrationTests;
 
 // "Number" enpoints tests

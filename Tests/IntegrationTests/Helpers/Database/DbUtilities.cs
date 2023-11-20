@@ -1,7 +1,6 @@
 using System.Reflection;
 using AutoCallsApi.Data.EntityFramework;
 using AutoCallsApi.Models;
-using IntegrationTests.Helpers.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Test.Helpers.Database;
