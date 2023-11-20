@@ -4,7 +4,7 @@ using EventSocketLibrary.Util.Util;
 
 namespace EventSocketLibrary.ClientESL;
 
-public class ClientESL : IAudioReproducer, IDialer
+public class ClientESL : IDialer
 {
     private Socket _socket;
     private string HOST;

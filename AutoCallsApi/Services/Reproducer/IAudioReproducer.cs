@@ -1,4 +1,4 @@
-namespace EventSocketLibrary.ClientESL;
+namespace AutoCallsApi.Services.Reproducer;
 
 public interface IAudioReproducer
 {

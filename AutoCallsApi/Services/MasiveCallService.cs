@@ -1,8 +1,7 @@
 using AutoCallsApi.Data;
-using AutoCallsApi.DTOs;
 using AutoCallsApi.Helpers;
 using AutoCallsApi.Models;
-using EventSocketLibrary.ClientESL;
+using AutoCallsApi.Services.Reproducer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutoCallsApi.Services;

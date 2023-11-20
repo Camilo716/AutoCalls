@@ -1,4 +1,4 @@
-using EventSocketLibrary.ClientESL;
+using AutoCallsApi.Services.Reproducer;
 
 namespace IntegrationTests.Helpers.ESL;
 

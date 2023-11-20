@@ -1,5 +1,4 @@
 using AutoCallsApi.Services.Reproducer;
-using EventSocketLibrary.ClientESL;
 using Microsoft.Extensions.Configuration;
 
 namespace IntegrationTests.Helpers.ESL;
