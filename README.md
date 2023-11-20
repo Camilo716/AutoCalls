@@ -46,7 +46,7 @@ dotnet ef database update
 git clone https://github.com/Camilo716/FreeSWITCH
 ```
 
-Remember to mount audios volume inside FreeSWITCH docker, changing "ROUTE_TO_AUTOCALLS_PROJECT" for your local one. Then:
+Remember to mount audios volume inside FreeSWITCH docker, changing "ROUTE_TO_AUTOCALLS_PROJECT" in docker-compose.yml  for your local one. Then:
 
 ```bash
 cd ./FreeSWITCH
