@@ -8,7 +8,7 @@ AutoCalls is a project that provides functionality for saving phone numbers and 
 
 - Audio Storage: Store audio byte stream in a database for playback during phone calls.
 
-- Mass Calling: Initiate mass phone calls to a list of numbers and deliver a predefined audio message. (WIP)
+- Mass Calling: Initiate mass phone calls to a list of numbers and deliver a predefined audio message.
 
 ## Technologies Used
 
@@ -28,7 +28,7 @@ dotnet test
 
 ## Set Database
 
-1. Configure connection in appsettings.json or appsettings.development.json
+1. Configure connection in appsettings.json or appsettings.development.json.
 2. Create schema:
 
 ``` bash
@@ -39,7 +39,7 @@ dotnet ef database update
 
 ## Deploy and configure local FreeSWITCH container
 
-1. Configure FreeSWITCH server and port in appsettings.json or appsettings.development.json
+1. Configure FreeSWITCH server and port in appsettings.json or appsettings.development.json.
 2. Deploy local FreeSWITCH:
 
 ```bash
