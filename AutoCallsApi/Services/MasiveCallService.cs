@@ -40,11 +40,9 @@ public class MasiveCallService
             Number number = await _numberRepository.GetByIdAsync(call.NumberId);
             call.Number = number;
 
-            string response = _audioPlayer.PlayAudio(call.Number.NumberValue, masiveCall.Audio.AudioUrl);
+            CallResult response = _audioPlayer.PlayAudio(call.Number.NumberValue, masiveCall.Audio.AudioUrl);
 
-            call.Result = response.StartsWith("+OK")
-                ? CallResult.OK.ToString()
-                : CallResult.ERR.ToString();
+            call.Result = response.ToString(); 
         }
 
         return await _masiveCallRepository.SaveAsync(masiveCall);

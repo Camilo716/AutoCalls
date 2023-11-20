@@ -1,3 +1,4 @@
+using AutoCallsApi.Helpers;
 using EventSocketLibrary;
 
 namespace AutoCallsApi.Services.AudioPlayer;
@@ -11,8 +12,12 @@ public class FreeswitchAudioPlayer : IPlayableAudio
         _dialer = dialer;
     }
 
-    public string PlayAudio(string number, string audioRoute)
+    public CallResult PlayAudio(string number, string audioRoute)
     {
-        return _dialer.Call(number, $"&playback({audioRoute}");
+        string response = _dialer.Call(number, $"&playback({audioRoute}");
+
+        return response.StartsWith("+OK")
+            ? CallResult.OK
+            : CallResult.ERR;
     }
 }
