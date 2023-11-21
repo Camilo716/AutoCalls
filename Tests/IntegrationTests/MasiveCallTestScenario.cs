@@ -26,14 +26,8 @@ public partial class EnpointsTests
     private async Task<Audio> ClientSaveAudioToPlay(HttpClient client)
     {
         HttpContent audio = AudioUtilities.GetAudioHttpContent("../../../Helpers/Audios/ValidFiles/testing-audio.wav", "testing-audio.wav");
-
-        var responses = new List<HttpResponseMessage>
-        {
-            await client.PostAsync("/api/audio", audio)
-        };
-
-        var modelLists =  await ModelUtilities.GetModelListFromHttpResponsesAsync<Audio>(responses);
-        return modelLists.FirstOrDefault()!;
+        HttpResponseMessage responses = await client.PostAsync("/api/audio", audio);
+        return await ModelUtilities.GetModelFromHttpResponseAsync<Audio>(responses);
     }
 
     private async Task<List<Number>> ClientSaveSomeNumbersToCall(HttpClient client)
@@ -66,13 +60,13 @@ public partial class EnpointsTests
 
     private async void AssertMadeAllCalls(int expectedCalls, HttpResponseMessage response)
     {
-        MasiveCall masiveCall = await MasiveCallUtilities.GetMassiveCallsModelFromHttpResponseAsync(response);
+        MasiveCall masiveCall = await ModelUtilities.GetModelFromHttpResponseAsync<MasiveCall>(response);
         Assert.Equal(expectedCalls, masiveCall.Calls.Count);
     }
 
     private async void AssertAllCallSucceed(HttpResponseMessage response)
     {
-        MasiveCall masiveCall = await MasiveCallUtilities.GetMassiveCallsModelFromHttpResponseAsync(response);
+        MasiveCall masiveCall = await ModelUtilities.GetModelFromHttpResponseAsync<MasiveCall>(response);
 
         foreach(Call call in masiveCall.Calls)
         {

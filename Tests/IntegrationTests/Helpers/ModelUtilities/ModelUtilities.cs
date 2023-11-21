@@ -10,11 +10,17 @@ public class ModelUtilities
 
         foreach (var response in responses)
         {
-            string json = await response.Content.ReadAsStringAsync();
-            T model = JsonConvert.DeserializeObject<T>(json)!;
+            T model = await GetModelFromHttpResponseAsync<T>(response);
             modelList.Add(model);
         }
 
         return modelList;
     }
+
+    internal static async Task<T> GetModelFromHttpResponseAsync<T>(HttpResponseMessage response)
+    {
+        string json = await response.Content.ReadAsStringAsync();
+        T model = JsonConvert.DeserializeObject<T>(json)!;
+        return model;
+    } 
 }
