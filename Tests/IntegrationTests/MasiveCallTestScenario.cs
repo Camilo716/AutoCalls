@@ -1,4 +1,3 @@
-using IntegrationTests.Helpers;
 using AutoCallsApi.Models;
 using AutoCallsApi.Helpers;
 using IntegrationTests.Helpers.ModelUtilities;
