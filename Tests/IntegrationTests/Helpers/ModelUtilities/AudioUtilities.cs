@@ -1,4 +1,6 @@
 using System.Net.Http.Headers;
+using AutoCallsApi.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace IntegrationTests.Helpers;
 
