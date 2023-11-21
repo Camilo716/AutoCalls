@@ -26,11 +26,4 @@ internal static class MasiveCallUtilities
 
         return httpContent;
     }
-
-    internal static async Task<MasiveCall> GetMassiveCallsModelFromHttpResponseAsync(HttpResponseMessage response)
-    {
-        string massiveCallsJson = await response.Content.ReadAsStringAsync();
-        MasiveCall massiveCallModel = JsonConvert.DeserializeObject<MasiveCall>(massiveCallsJson)!;
-        return massiveCallModel;
-    }
 }

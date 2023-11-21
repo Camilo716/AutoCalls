@@ -14,11 +14,4 @@ internal static class NumberUtilities
             jsonContent, Encoding.UTF8, "application/json");
         return httpContent;
     }
-
-    internal static async Task<ICollection<Number>> GetNumbersCollectionFromHttpResponse(HttpResponseMessage response)
-    {
-        string numberJson = await response.Content.ReadAsStringAsync();
-        ICollection<Number> numbersModel = JsonConvert.DeserializeObject<ICollection<Number>>(numberJson)!;
-        return numbersModel;
-    }
 }
