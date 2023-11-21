@@ -1,5 +1,5 @@
 using System.Net;
-using IntegrationTests.Helpers;
+using IntegrationTests.Helpers.ModelUtilities;
 
 namespace IntegrationTests;
 

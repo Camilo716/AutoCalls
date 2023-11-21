@@ -1,10 +1,7 @@
-using System.Text;
 using AutoCallsApi.DTOs;
-using Newtonsoft.Json;
 using Microsoft.IdentityModel.Tokens;
-using AutoCallsApi.Models;
 
-namespace IntegrationTests.Helpers;
+namespace IntegrationTests.Helpers.ModelUtilities;
 
 internal static class MasiveCallUtilities
 {
@@ -18,12 +15,6 @@ internal static class MasiveCallUtilities
             IdsNumbersToCall = idsNumbersToCall,
             AudioId = audioId 
         };
-
-        string jsonContent = JsonConvert.SerializeObject(call);
-
-        HttpContent httpContent = new StringContent(
-            jsonContent, Encoding.UTF8, "application/json");
-
-        return httpContent;
+        return ModelUtilities.GetHttpContentFromModel<MasiveCallCreationDTO>(call);
     }
 }

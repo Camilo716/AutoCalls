@@ -1,3 +1,4 @@
+using System.Text;
 using Newtonsoft.Json;
 
 namespace IntegrationTests.Helpers.ModelUtilities;
@@ -23,4 +24,12 @@ public class ModelUtilities
         T model = JsonConvert.DeserializeObject<T>(json)!;
         return model;
     } 
+
+    internal static HttpContent GetHttpContentFromModel<T>(T model)
+    {
+        string jsonContent = JsonConvert.SerializeObject(model);
+        HttpContent httpContent = new StringContent(
+            jsonContent, Encoding.UTF8, "application/json");
+        return httpContent;
+    }
 }

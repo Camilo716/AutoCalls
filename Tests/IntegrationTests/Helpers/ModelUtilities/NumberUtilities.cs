@@ -1,17 +1,11 @@
-using System.Text;
 using AutoCallsApi.DTOs;
-using AutoCallsApi.Models;
-using Newtonsoft.Json;
+using IntegrationTests.Helpers.ModelUtilities;
 
 internal static class NumberUtilities
 {
-    internal static HttpContent GetNumberHttpContent(string numberValue)
+    internal static async Task<HttpContent> GetNumberHttpContent(string numberValue)
     {
         NumberCreationDTO number = new NumberCreationDTO { NumberValue = numberValue };
-        string jsonContent = JsonConvert.SerializeObject(number);
-
-        HttpContent httpContent = new StringContent(
-            jsonContent, Encoding.UTF8, "application/json");
-        return httpContent;
+        return ModelUtilities.GetHttpContentFromModel<NumberCreationDTO>(number);
     }
 }

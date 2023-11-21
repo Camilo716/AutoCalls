@@ -32,9 +32,9 @@ public partial class EnpointsTests
 
     private async Task<List<Number>> ClientSaveSomeNumbersToCall(HttpClient client)
     {
-        HttpContent number1 = NumberUtilities.GetNumberHttpContent("321459789");
-        HttpContent number2 = NumberUtilities.GetNumberHttpContent("320645942");
-        HttpContent number3 = NumberUtilities.GetNumberHttpContent("319123413");
+        HttpContent number1 = await NumberUtilities.GetNumberHttpContent("321459789");
+        HttpContent number2 = await NumberUtilities.GetNumberHttpContent("320645942");
+        HttpContent number3 = await NumberUtilities.GetNumberHttpContent("319123413");
 
         var responses = new List<HttpResponseMessage>
         {
