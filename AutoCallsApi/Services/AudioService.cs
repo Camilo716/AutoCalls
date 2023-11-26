@@ -17,7 +17,7 @@ public class AudioService
         _fileStorage = fileStorage;
     }
 
-    internal async Task<Audio> PostAudioAsync(IFormFile audioFile)
+    internal async Task<Audio> InsertAudioAsync(IFormFile audioFile)
     {
         using var memoryStream = new MemoryStream();
         await audioFile.CopyToAsync(memoryStream);

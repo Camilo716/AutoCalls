@@ -24,7 +24,7 @@ public class AudioController : ControllerBase
             return BadRequest(
                 $"{audioFile.FileName} hasn't valid extension ({validExtensions})");
 
-        Audio audioPosted = await _audioService.PostAudioAsync(audioFile);
+        Audio audioPosted = await _audioService.InsertAudioAsync(audioFile);
         return Ok(audioPosted);
     }
 }
