@@ -1,25 +1,30 @@
 using AutoCallsApi.Models;
 using AutoCallsApi.Helpers;
 using IntegrationTests.Helpers.ModelUtilities;
+using System.Runtime.CompilerServices;
+using Microsoft.OpenApi.Any;
+using System.ComponentModel;
+using Microsoft.Identity.Client;
 
 namespace IntegrationTests;
 
-// "MasiveCall" tests scenario
+// "MassiveCall" tests scenario
 public partial class EnpointsTests
 {
     [Fact]
-    public async Task ClientMakeAMasiveCallTest()
+    public async Task ClientMakeAMassiveCallTest()
     {
         HttpClient client = _factory.CreateClient();
         Audio audio = await ClientSaveAudioToPlay(client);
         List<Number> numbers = await ClientSaveSomeNumbersToCall(client);
-        HttpContent masiveCall = ClientPrepareMasiveCall(audio, numbers);
+        HttpContent masiveCall = ClientPrepareMassiveCall(audio, numbers);
 
         HttpResponseMessage response = await client.PostAsync("/api/MasiveCall", masiveCall);
 
         response.EnsureSuccessStatusCode();
         AssertMadeAllCalls(expectedCalls: numbers.Count, response);
         AssertAllCallSucceed(response);
+        AssertCalledCorrectNumbers(numbers, response);
     }
 
     private async Task<Audio> ClientSaveAudioToPlay(HttpClient client)
@@ -45,7 +50,7 @@ public partial class EnpointsTests
         return await ModelUtilities.GetModelListFromHttpResponsesAsync<Number>(responses);
     }
     
-    private HttpContent ClientPrepareMasiveCall(Audio audio, List<Number> numbers)
+    private HttpContent ClientPrepareMassiveCall(Audio audio, List<Number> numbers)
     {
         return MasiveCallUtilities.GetCallHttpContent(
             idsNumbersToCall: new int[]{
@@ -73,17 +78,14 @@ public partial class EnpointsTests
         }
     }
 
-    // WIP
-    // private async void AssertCalledCorrectNumbers(List<Number> expectedNumbers, HttpResponseMessage response)
-    // {
-    //     MasiveCall masiveCall = await MasiveCallUtilities.GetMassiveCallsModelFromHttpResponseAsync(response);
-    //     List<Call> calls = masiveCall.Calls.ToList();
-    //     int nPointer = 0;
+    private async void AssertCalledCorrectNumbers(IEnumerable<Number> expectedNumbers, HttpResponseMessage response)
+    {
+        MasiveCall masiveCall = await ModelUtilities.GetModelFromHttpResponseAsync<MasiveCall>(response);
+        IEnumerable<string> numberValuesCalled = masiveCall.Calls.Select(c => c.Number.NumberValue);
 
-    //     for (int i = 0; i < masiveCall.Calls.Count; i++)
-    //     {
-    //         if(expectedNumbers[nPointer].NumberValue == calls[i].Numbervalue)
-
-    //     }
-    // }
+        foreach (string expectedNumberValue in expectedNumbers.Select(n => n.NumberValue))
+        {
+            Assert.Contains(expectedNumberValue, numberValuesCalled);
+        }
+    }
 }
