@@ -1,10 +1,6 @@
 using AutoCallsApi.Models;
 using AutoCallsApi.Helpers;
 using IntegrationTests.Helpers.ModelUtilities;
-using System.Runtime.CompilerServices;
-using Microsoft.OpenApi.Any;
-using System.ComponentModel;
-using Microsoft.Identity.Client;
 
 namespace IntegrationTests;
 
