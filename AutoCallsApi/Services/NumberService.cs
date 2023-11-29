@@ -17,7 +17,7 @@ public class NumberService
         return await _repository.GetAllAsync();
     }
 
-    public async Task<Number> PostNumberAsync(Number number)
+    public async Task<Number> InsertNumberAsync(Number number)
     {
         return await _repository.SaveAsync(number);
     }

@@ -19,7 +19,6 @@ public class NumberController : ControllerBase
         _mapper = mapper;
     }
 
-
     [HttpGet]
     public async Task<ActionResult<List<Number>>> GetAsync()
     {
@@ -31,7 +30,7 @@ public class NumberController : ControllerBase
     public async Task<ActionResult<Number>> PostAsync([FromBody] NumberCreationDTO numberDto)
     {
         Number number = _mapper.Map<Number>(numberDto);
-        Number numberPosted = await _numberService.PostNumberAsync(number);
+        Number numberPosted = await _numberService.InsertNumberAsync(number);
         return Ok(numberPosted);
     }
 }
